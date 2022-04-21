@@ -1,4 +1,4 @@
-﻿Shader "Ree/UIAdditiveGlow"
+﻿Shader "BeatLeader/UIAdditiveGlow"
 {
     Properties
     {

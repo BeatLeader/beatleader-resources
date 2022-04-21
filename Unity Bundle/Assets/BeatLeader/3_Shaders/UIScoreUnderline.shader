@@ -1,4 +1,4 @@
-﻿Shader "Ree/UIScoreUnderline"
+﻿Shader "BeatLeader/UIScoreUnderline"
 {
     Properties
     {

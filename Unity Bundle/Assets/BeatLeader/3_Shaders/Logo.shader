@@ -1,4 +1,4 @@
-﻿Shader "Ree/BLLogo"
+﻿Shader "BeatLeader/Logo"
 {
     Properties
     {

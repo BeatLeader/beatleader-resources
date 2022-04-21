@@ -1,8 +1,10 @@
-﻿Shader "BeatLeader/UIScoreBackground"
+﻿Shader "BeatLeader/HandAccIndicator"
 {
     Properties
     {
-        
+        _Color ("Color", Color) = (1, 1, 1, 1)
+        _FillValue ("FillValue", Range(0, 1)) = 1
+        _Thickness ("Thickness", Range(0, 1)) = 1
     }
     
     SubShader
@@ -31,7 +33,7 @@
             {
                 float4 vertex : POSITION;
                 float4 color : COLOR;
-                float2 uv0 : TEXCOORD;
+                float2 uv0 : TEXCOORD0;
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
             };
@@ -40,29 +42,38 @@
             {
                 float4 vertex : SV_POSITION;
                 float4 color : COLOR;
-                float2 avatar_uv : TEXCOORD0;
+                float2 uv : TEXCOORD0;
             };
 
+            float4 _Color;
+            float _FillValue;
+            float _Thickness;
+            
             v2f vert (const appdata v)
             {
+                float2 spinner_uv = (v.uv0 - float2(0.5f, 0.5f)) * 2.0f;
+                
                 v2f o;
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.color = v.color;
-                o.avatar_uv = v.uv0;
+                o.uv = spinner_uv;
                 return o;
             }
 
-            static const float_range x_fade_range = create_range(0.5, 0.3);
-            static const float_range y_fade_range = create_range(0.5, 0.48);
+            static const float max_angle = UNITY_PI * 1.05f;
+            static const float_range angle_fade_range = create_range( 0.0f, -0.03);
+            static const float_range length_fade_range = create_range( 0.0f, -0.02);
 
             float4 frag (const v2f i) : SV_Target
             {
-                float fade = 1.0f;
-                fade *= get_range_ratio_clamped(x_fade_range, abs(i.avatar_uv.x - 0.5f));
-                fade *= get_range_ratio_clamped(y_fade_range, abs(i.avatar_uv.y - 0.5f));
+                const float angle = atan2(i.uv.y, abs(i.uv.x)) + UNITY_HALF_PI - max_angle * _FillValue;
+                const float distance = abs(1 - length(i.uv) - _Thickness) - _Thickness;
                 
-                float4 col = i.color;
-                col.a *= fade;
+                float fade = get_range_ratio_clamped(angle_fade_range, angle);
+                fade *= get_range_ratio_clamped(length_fade_range, distance);
+                
+                float4 col = _Color;
+                col.a *= fade * i.color.a;
                 return col;
             }
             ENDCG

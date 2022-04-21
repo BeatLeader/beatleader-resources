@@ -1,4 +1,4 @@
-﻿Shader "Unlit/Text"
+﻿Shader "BeatLeader/MonkeText"
 {
     Properties
     {

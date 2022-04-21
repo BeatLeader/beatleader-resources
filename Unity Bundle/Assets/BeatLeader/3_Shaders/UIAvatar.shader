@@ -1,4 +1,4 @@
-﻿Shader "Ree/UIAvatar"
+﻿Shader "BeatLeader/UIAvatar"
 {
     Properties
     {
@@ -77,11 +77,11 @@
                 return o;
             }
 
-            static const float_range fade_range = create_range(1.0, 0.96);
+            static const float_range angle_fade_range = create_range(1.0, 0.96);
 
             float4 frag (const v2f i) : SV_Target
             {
-                float fade = 1 - get_range_ratio_clamped(fade_range, length(i.relative_uv));
+                float fade = 1 - get_range_ratio_clamped(angle_fade_range, length(i.relative_uv));
                 fade = 1 - fade * fade;
 
                 const float4 spinner = tex2D(_Spinner, i.spinner_uv);
