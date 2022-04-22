@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BeatLeader {
     public class GraphTest : MonoBehaviour {
@@ -15,8 +16,16 @@ namespace BeatLeader {
             go.transform.SetSiblingIndex(1);
         }
 
+        private bool _updateRequired = true;
+        
         private void Update() {
+            if (!_updateRequired) return;
             _accuracyGraph.SetPoints(points, canvasRadius);
+            _updateRequired = false;
+        }
+
+        private void OnValidate() {
+            _updateRequired = true;
         }
 
         private void OnDrawGizmos() {
