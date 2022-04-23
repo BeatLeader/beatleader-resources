@@ -1,8 +1,9 @@
-﻿Shader "BeatLeader/UIScoreBackground"
+﻿Shader "BeatLeader/AccDetailsRowBackground"
 {
     Properties
     {
-        
+        _LeftColor ("LeftColor", Color) = (1, 1, 1, 1)
+        _RightColor ("RightColor", Color) = (1, 1, 1, 1)
     }
     
     SubShader
@@ -14,8 +15,8 @@
         
         Cull Off
         ZWrite Off
-        Blend SrcAlpha OneMinusSrcAlpha
-        ColorMask RGB
+        BlendOp Add
+        Blend One One
 
         Pass
         {
@@ -40,29 +41,33 @@
             {
                 float4 vertex : SV_POSITION;
                 float4 vertex_color : COLOR;
-                float2 avatar_uv : TEXCOORD0;
+                float2 uv : TEXCOORD0;
             };
+
+            static const float_range y_remap_range = create_range(0.0, 0.08);
+            static const float_range x_fade_range = create_range(0.5, 0.46);
+            static const float_range y_fade_range = create_range(0.5, 0.1);
+            static const float_range gradient_range = create_range(0.25, 0.75);
+
+            float4 _LeftColor;
+            float4 _RightColor;
 
             v2f vert (const appdata v)
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.vertex_color = v.color;
-                o.avatar_uv = v.uv0;
+                o.uv = float2(v.uv1.x, get_range_ratio(y_remap_range, v.uv1.y));
                 return o;
             }
-
-            static const float_range x_fade_range = create_range(0.5, 0.3);
-            static const float_range y_fade_range = create_range(0.5, 0.48);
 
             float4 frag (const v2f i) : SV_Target
             {
                 float fade = 1.0f;
-                fade *= get_range_ratio_clamped(x_fade_range, abs(i.avatar_uv.x - 0.5f));
-                fade *= get_range_ratio_clamped(y_fade_range, abs(i.avatar_uv.y - 0.5f));
-                
-                float4 col = i.vertex_color;
-                col.a *= fade;
+                fade *= get_range_ratio_clamped(x_fade_range, abs(i.uv.x - 0.5f));
+                fade *= get_range_ratio_clamped(y_fade_range, abs(i.uv.y - 0.5f));
+                float4 col = lerp(_LeftColor, _RightColor, get_range_ratio_clamped(gradient_range, i.uv.x));
+                col *= i.vertex_color.a * fade;
                 return col;
             }
             ENDCG

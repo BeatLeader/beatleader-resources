@@ -40,7 +40,7 @@
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+                float4 vertex_color : COLOR;
                 float2 uv : TEXCOORD0;
                 float2 normalized_pos : TEXCOORD1;
             };
@@ -56,7 +56,7 @@
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.uv = uv;
                 o.normalized_pos = v.uv1;
-                o.color = v.color;
+                o.vertex_color = v.color;
                 return o;
             }
 

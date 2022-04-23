@@ -39,7 +39,7 @@
             struct v2f
             {
                 float4 vertex : SV_POSITION;
-                float4 color : COLOR;
+                float4 vertex_color : COLOR;
                 float2 avatar_uv : TEXCOORD0;
             };
 
@@ -51,7 +51,7 @@
             {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
-                o.color = v.color;
+                o.vertex_color = v.color;
                 o.avatar_uv = float2(v.uv0.x, get_range_ratio(y_remap_range, pow(v.uv0.y, 222)));
                 return o;
             }
@@ -61,7 +61,7 @@
                 float fade = 1.0f;
                 fade *= get_range_ratio_clamped(x_fade_range, abs(i.avatar_uv.x - 0.5f));
                 fade *= get_range_ratio_clamped(y_fade_range, abs(i.avatar_uv.y - 0.5f));
-                return i.color * fade;
+                return i.vertex_color * fade;
             }
             ENDCG
         }

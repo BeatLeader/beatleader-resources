@@ -212,7 +212,7 @@ GameObject:
   - component: {fileID: 1097162283}
   - component: {fileID: 1097162282}
   m_Layer: 0
-  m_Name: AccDetailsBottomRowTest
+  m_Name: AccDetailsRowTest
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -236,7 +236,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: c5ffba792b75ee64a81b44ea0f913b92, type: 2}
+  - {fileID: 2100000, guid: f366b36859d751e468ea8f99cf41fe80, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
