@@ -16,7 +16,6 @@
         ZWrite Off
         BlendOp Add
         Blend One One
-        ColorMask RGB
 
         Pass
         {
@@ -46,28 +45,28 @@
             };
 
             float4 _Color;
-            static const float_range range = create_range(1.0f, 0.5f);
+            static const float_range line_aa_range = create_range(1.0f, 0.4f);
+            static const float_range fade_range = create_range(0.495f, 0.46f);
 
             v2f vert (const appdata v)
             {
                 const float2 uv = float2((v.uv0.x - 0.5f) * 2.0f, v.uv0.y);
+                const float2 normalized_pos = v.uv1 - float2(0.5f, 0.5f);
                 
                 v2f o;
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.uv = uv;
-                o.normalized_pos = v.uv1;
+                o.normalized_pos = normalized_pos;
                 o.vertex_color = v.color;
                 return o;
             }
 
             float4 frag (const v2f i) : SV_Target
             {
-                if (i.normalized_pos.x < 0.005f | i.normalized_pos.x > 0.995f | i.normalized_pos.y < 0.005f | i.normalized_pos.y > 0.995f) discard;
-
-                const float fade = get_range_ratio_clamped(range, abs(i.uv.x));
-                float4 col = _Color;
-                col *= fade;
-                return col;
+                float fade = get_range_ratio_clamped(fade_range, abs(i.normalized_pos.x));
+                fade *= get_range_ratio_clamped(fade_range, abs(i.normalized_pos.y));
+                fade *= get_range_ratio_clamped(line_aa_range, abs(i.uv.x));
+                return _Color * fade;
             }
             ENDCG
         }

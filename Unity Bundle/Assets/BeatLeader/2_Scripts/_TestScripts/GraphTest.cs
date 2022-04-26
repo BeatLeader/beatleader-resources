@@ -1,26 +1,29 @@
-﻿using System;
-using UnityEngine;
+﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace BeatLeader {
     public class GraphTest : MonoBehaviour {
         [SerializeField] private Transform targetTransform;
         [SerializeField] private GameObject reeGraphPrefab;
+        [SerializeField] private Image backgroundImage;
         [SerializeField] private float canvasRadius = 100.0f;
+        [SerializeField] private float songDuration = 60.0f;
         [SerializeField] private float[] points;
 
-        private AccuracyGraph _accuracyGraph;
+        private AccuracyGraph _graph;
 
         private void Start() {
             var go = Instantiate(reeGraphPrefab, targetTransform, false);
-            _accuracyGraph = go.GetComponent<AccuracyGraph>();
-            go.transform.SetSiblingIndex(1);
+            _graph = go.GetComponent<AccuracyGraph>();
+            _graph.Construct(backgroundImage);
         }
 
-        private bool _updateRequired = true;
-        
+        private bool _updateRequired;
+
         private void Update() {
             if (!_updateRequired) return;
-            _accuracyGraph.SetPoints(points, canvasRadius);
+            AccuracyGraphUtils.PostProcessPoints(points, out var positions, out var viewRect);
+            _graph.Setup(positions, viewRect, canvasRadius, songDuration);
             _updateRequired = false;
         }
 

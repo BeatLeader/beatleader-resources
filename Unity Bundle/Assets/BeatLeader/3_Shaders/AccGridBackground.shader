@@ -3,6 +3,8 @@
     Properties
     {
         _BackColor ("BackColor", Color) = (1, 1, 1, 1)
+        _PowerX ("PowerX", Float) = 5
+        _PowerY ("PowerY", Float) = 5
     }
     
     SubShader
@@ -45,6 +47,8 @@
             };
 
             float4 _BackColor;
+            float _PowerX;
+            float _PowerY;
             
             v2f vert (const appdata v)
             {
@@ -57,13 +61,11 @@
                 return o;
             }
 
-            static const float super_ellipse_power = 5.0f;
-
             float get_super_ellipse_distance_to_circle(float2 on_circle)
             {
                 const float2 on_ellipse = float2(
-                    pow(on_circle.x, super_ellipse_power),
-                    pow(on_circle.y, super_ellipse_power)
+                    pow(abs(on_circle.x), _PowerX),
+                    pow(abs(on_circle.y), _PowerY)
                 );
                 
                 return 1 - length(on_ellipse);
@@ -111,6 +113,9 @@
                 float2 uv : TEXCOORD0;
             };
             
+            float _PowerX;
+            float _PowerY;
+            
             v2f vert (const appdata v)
             {
                 const float2 scaled_uv = (v.uv1 - float2(0.5f, 0.5f)) * 2.0f;
@@ -122,13 +127,11 @@
                 return o;
             }
 
-            static const float super_ellipse_power = 5.0f;
-
             float get_super_ellipse_distance_to_circle(float2 on_circle)
             {
                 const float2 on_ellipse = float2(
-                    pow(on_circle.x, super_ellipse_power),
-                    pow(on_circle.y, super_ellipse_power)
+                    pow(abs(on_circle.x), _PowerX),
+                    pow(abs(on_circle.y), _PowerY)
                 );
                 
                 return 1 - length(on_ellipse);
