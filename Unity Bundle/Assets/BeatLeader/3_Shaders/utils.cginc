@@ -1,6 +1,6 @@
 float3 get_curved_position(const float3 local_pos, const float radius)
 {
-    return float3(
+    return (radius < 1e-10f) ? local_pos : float3(
         sin(local_pos.x / radius) * radius,
         local_pos.y,
         cos(local_pos.x / radius) * radius - radius
