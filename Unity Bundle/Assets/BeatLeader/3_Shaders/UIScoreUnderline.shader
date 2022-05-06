@@ -2,7 +2,11 @@
 {
     Properties
     {
-        
+        _IdleColor("IdleColor", Color) = (1, 1, 1, 1)
+        _HighlightColor("HighlightColor", Color) = (1, 1, 1, 1)
+        _Waves ("Waves", Range(0, 1)) = 1
+        _Seed ("Seed", Range(0, 1)) = 1
+        _HighlightTest ("HighlightTest", Range(0, 1)) = 1
     }
     
     SubShader
@@ -16,6 +20,7 @@
         ZWrite Off
         BlendOp Add
         Blend One One
+        ColorMask RGB
 
         Pass
         {
@@ -23,9 +28,11 @@
             #pragma vertex vert
             #pragma fragment frag
 
+            #include "KeijiroNoiseCommon3D.cginc"
             #include "UnityCG.cginc"
             #include "utils.cginc"
             #include "Range.cginc"
+            #include "ScoreUnderline.cginc"
 
             struct appdata
             {
@@ -40,28 +47,41 @@
             {
                 float4 vertex : SV_POSITION;
                 float4 vertex_color : COLOR;
-                float2 avatar_uv : TEXCOORD0;
+                float2 uv : TEXCOORD0;
             };
+            
+            float4 _IdleColor;
+            float4 _HighlightColor;
+            float _Waves;
+            float _Seed;
+            float _HighlightTest;
 
-            static const float_range y_remap_range = create_range(0.0, 0.05);
-            static const float_range x_fade_range = create_range(0.5, 0.44);
-            static const float_range y_fade_range = create_range(0.5, 0.3);
+            static const float vertical_offset = -1.3f;
 
             v2f vert (const appdata v)
             {
+                const float2 relative_uv = float2(
+                   v.uv0.x * 2 - 1,
+                   v.uv0.y * 2 - 1
+                );
+
+                float4 vertex_pos = v.vertex;
+                vertex_pos.y += vertical_offset;
+                
                 v2f o;
-                o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
+                o.vertex = UnityObjectToClipPos(get_curved_position(vertex_pos, v.uv2.x));
                 o.vertex_color = v.color;
-                o.avatar_uv = float2(v.uv0.x, get_range_ratio(y_remap_range, pow(v.uv0.y, 222)));
+                o.vertex_color.r *= _HighlightTest;
+                o.uv = relative_uv;
                 return o;
             }
 
             float4 frag (const v2f i) : SV_Target
             {
-                float fade = 1.0f;
-                fade *= get_range_ratio_clamped(x_fade_range, abs(i.avatar_uv.x - 0.5f));
-                fade *= get_range_ratio_clamped(y_fade_range, abs(i.avatar_uv.y - 0.5f));
-                return i.vertex_color * fade;
+                const float4 color = lerp(_IdleColor, _HighlightColor, i.vertex_color.r);
+                float4 col = get_underline_color(color, i.uv, _Seed, i.vertex_color.r, _Waves);
+                col *= i.vertex_color.a;
+                return col;
             }
             ENDCG
         }

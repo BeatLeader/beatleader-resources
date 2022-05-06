@@ -52,13 +52,13 @@
                 return o;
             }
 
-            static const float_range x_fade_range = create_range(0.5, 0.3);
+            static const float_range fancy_x_fade_range = create_range(0.5, 0.3);
             static const float_range y_fade_range = create_range(0.5, 0.48);
 
             float4 frag (const v2f i) : SV_Target
             {
                 float fade = 1.0f;
-                fade *= get_range_ratio_clamped(x_fade_range, abs(i.avatar_uv.x - 0.5f));
+                fade *= get_range_ratio_clamped(fancy_x_fade_range, abs(i.avatar_uv.x - 0.5f));
                 fade *= get_range_ratio_clamped(y_fade_range, abs(i.avatar_uv.y - 0.5f));
                 
                 float4 col = i.vertex_color;
