@@ -69,12 +69,20 @@
             }
             
             static const float_range alpha_range = create_range(0.0f, 0.1f);
+            static const float_range bg_y_fade_range = create_range(0.65f, 0.55f);
+            static const float_range bg_x_fade_range = create_range(1.0f, 0.5f);
 
             float4 frag (const v2f i) : SV_Target
             {
                 const float distance = get_super_ellipse_distance_to_circle(i.uv);
                 const float alpha = get_range_ratio_clamped(alpha_range, distance);
+                
+                float fade = get_range_ratio_clamped(bg_y_fade_range, abs(i.uv.y));
+                fade *= get_range_ratio_clamped(bg_x_fade_range, abs(i.uv.x));
+                fade = 1.0f - fade * 0.4f;
+                
                 float4 col = i.vertex_color;
+                col.rgb *= fade;
                 col.a *= alpha;
                 return col;
             }
