@@ -19,13 +19,13 @@ static const float static_glow = 0.01f;
 static const float_range big_noise_fade_range = create_range(-1.0, 0.7);
 static const float_range small_noise_fade_range = create_range(-0.6, 0.6);
 
-float4 get_underline_color(const float4 color, const float2 uv, const float seed, const float highlight, const float noise)
+float4 get_underline_color(const float4 halo_color, const float4 rim_color, const float2 uv, const float seed, const float highlight, const float noise)
 {
     const float distance = uv.y + 0.5f;
     const float x_fade = get_range_ratio_clamped(x_fade_range, abs(uv.x));
     
-    const float big_noise = get_noise_value(uv, seed, big_noise_fade_range, 8.0f, 0.5f, 6.0f, 0.3f);
-    const float small_noise = get_noise_value(uv, seed, small_noise_fade_range, 15.0f, 0.3f, 16.0f, 0.6f);
+    const float big_noise = get_noise_value(uv, seed, big_noise_fade_range, 4.0f, 0.5f, 6.0f, 0.3f);
+    const float small_noise = get_noise_value(uv, seed, small_noise_fade_range, 12.0f, 0.3f, 16.0f, 0.6f);
     
     const float glow = static_glow + (big_noise + small_noise) * noise * highlight;
 
@@ -36,9 +36,7 @@ float4 get_underline_color(const float4 color, const float2 uv, const float seed
     const float halo_value = pow(shine, 2);
     const float rim_value = pow(shine, 4);
 
-    const float4 rim_color = lerp(color, float4(1, 1, 1, 0), 0.7f * highlight);
-
-    float4 col = color * halo_value;
+    float4 col = halo_color * halo_value;
     col += rim_color * rim_value;
     return col;
 }

@@ -95,6 +95,7 @@ Material:
     - _SrcBlend: 1
     - _TimeOffset: 0.9468454
     - _UVSec: 0
+    - _WavesAmplitude: 1
     - _ZWrite: 1
     m_Colors:
     - _BGColor: {r: 0, g: 0.24750662, b: 1, a: 1}

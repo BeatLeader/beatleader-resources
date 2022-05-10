@@ -2,9 +2,9 @@
 {
     Properties
     {
-        _IdleColor("IdleColor", Color) = (1, 1, 1, 1)
-        _HighlightColor("HighlightColor", Color) = (1, 1, 1, 1)
-        _Waves ("Waves", Range(0, 1)) = 1
+        _RimColor("RimColor", Color) = (1, 1, 1, 1)
+        _HaloColor("HaloColor", Color) = (1, 1, 1, 1)
+        _WavesAmplitude ("WavesAmplitude", Range(0, 1)) = 1
         _Seed ("Seed", Range(0, 1)) = 1
         _HighlightTest ("HighlightTest", Range(0, 1)) = 1
     }
@@ -50,9 +50,9 @@
                 float2 uv : TEXCOORD0;
             };
             
-            float4 _IdleColor;
-            float4 _HighlightColor;
-            float _Waves;
+            float4 _RimColor;
+            float4 _HaloColor;
+            float _WavesAmplitude;
             float _Seed;
             float _HighlightTest;
 
@@ -78,8 +78,14 @@
 
             float4 frag (const v2f i) : SV_Target
             {
-                const float4 color = lerp(_IdleColor, _HighlightColor, i.vertex_color.r);
-                float4 col = get_underline_color(color, i.uv, _Seed, i.vertex_color.r, _Waves);
+                const float highlight = i.vertex_color.r;
+                const float rim_brightness = 0.04f + 0.96f * highlight;
+                const float halo_brightness = 0.2f + 0.9f * highlight;
+                
+                const float4 rim_color = _RimColor * rim_brightness;
+                const float4 halo_color = _HaloColor * halo_brightness;
+                
+                float4 col = get_underline_color(halo_color, rim_color, i.uv, _Seed, highlight, _WavesAmplitude);
                 col *= i.vertex_color.a;
                 return col;
             }

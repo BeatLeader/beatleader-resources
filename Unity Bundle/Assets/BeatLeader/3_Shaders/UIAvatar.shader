@@ -5,6 +5,7 @@
         _AvatarTexture ("Texture", 2D) = "white" {}
         _Spinner ("Spinner", 2D) = "white" {}
         _FadeValue ("FadeValue", Range(0, 1)) = 1
+        _WavesAmplitude ("WavesAmplitude", Range(0, 1)) = 1
         _BackgroundColor ("BackgroundColor", Color) = (0, 0, 0, 0)
         _RimColor ("RimColor", Color) = (1, 1, 1, 1)
         _HaloColor ("HaloColor", Color) = (1, 1, 1, 1)
@@ -138,7 +139,7 @@
             };
 
             float _Scale;
-            float _RaysFactor;
+            float _WavesAmplitude;
             float _FadeValue;
             float4 _BackgroundColor;
             float4 _RimColor;
@@ -178,15 +179,15 @@
 
             float4 frag (const v2f i) : SV_Target
             {
-                const float big_noise = get_noise_value(i.relative_uv, big_noise_fade_range, 2.0f, 0.5f, 4.0f, 0.4f);
-                const float small_noise = get_noise_value(i.relative_uv, small_noise_fade_range, 4.0f, 0.3f, 16.0f, 0.5f);
+                const float big_noise = get_noise_value(i.relative_uv, big_noise_fade_range, 2.0f, 0.5f, 4.0f, 0.6f * _WavesAmplitude);
+                const float small_noise = get_noise_value(i.relative_uv, small_noise_fade_range, 4.0f, 0.3f, 16.0f, 0.8f * _WavesAmplitude);
                 const float glow = static_glow + big_noise + small_noise;
 
                 const float distance = length(i.relative_uv) - 1;
                 float shine = get_shine_value(distance, glow, 0.5, 0.005, 0.1);
                 shine *= get_shine_value(distance, glow, -0.3, -0.001, -0.02);
                 shine = pow(shine, 1 + log(1 / glow));
-                
+
                 const float halo_value = pow(shine, 4);
                 const float rim_value = pow(shine, 9);
 
