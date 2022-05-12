@@ -116,6 +116,7 @@
             float4 _ViewRect;
             float _SongDuration;
             float _CursorPosition;
+            float _FakeBloomAmount;
 
             static const float normalized_minute = 60.0f;
             static const float normalized_second = 1.0f;
@@ -194,7 +195,7 @@
                 col = lerp(col, _TenPercentLineColor, ten_percent_line_value * horizontal_line_fade);
                 col = lerp(col, _CursorLineColor, cursor_line_value);
                 col *= fade;
-                return col;
+                return apply_fake_bloom(col, _FakeBloomAmount);
             }
             ENDCG
         }

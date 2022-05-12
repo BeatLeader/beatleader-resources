@@ -113,6 +113,7 @@
                 float2 uv : TEXCOORD0;
             };
             
+            float _FakeBloomAmount;
             float _PowerX;
             float _PowerY;
             
@@ -146,7 +147,10 @@
                 const float alpha = get_range_ratio_clamped(alpha_range, distance);
                 float fade = 1 - get_range_ratio_clamped(fade_range, distance);
                 fade = pow(fade, 2);
-                return i.color * fade * alpha;
+                
+                float4 col = i.color * fade;
+                col *= alpha;
+                return apply_fake_bloom(col, _FakeBloomAmount);
             }
             ENDCG
         }

@@ -21,3 +21,15 @@ float4 alpha_blend(float4 source, float4 destination)
 {
     return source * source.a + destination * (1 - source.a);
 }
+
+float4 apply_fake_bloom(float4 source_color, const float fake_bloom_value)
+{
+    const float fake_bloom_brightness = pow(source_color.a, 2) * fake_bloom_value;
+
+    return float4(
+        source_color.r + fake_bloom_brightness,
+        source_color.g + fake_bloom_brightness,
+        source_color.b + fake_bloom_brightness,
+        source_color.a
+    );
+}

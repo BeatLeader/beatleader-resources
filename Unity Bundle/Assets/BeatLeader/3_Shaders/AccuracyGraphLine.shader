@@ -45,6 +45,8 @@
             };
 
             float4 _Color;
+            float _FakeBloomAmount;
+            
             static const float_range line_aa_range = create_range(1.0f, 0.4f);
             static const float_range fade_range = create_range(0.495f, 0.46f);
 
@@ -66,7 +68,7 @@
                 float fade = get_range_ratio_clamped(fade_range, abs(i.normalized_pos.x));
                 fade *= get_range_ratio_clamped(fade_range, abs(i.normalized_pos.y));
                 fade *= get_range_ratio_clamped(line_aa_range, abs(i.uv.x));
-                return _Color * fade;
+                return apply_fake_bloom(_Color * fade, 0.6f * _FakeBloomAmount);
             }
             ENDCG
         }

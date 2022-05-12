@@ -43,7 +43,7 @@
             };
 
             sampler2D _MainTex;
-            float4 _MainTex_ST;
+            float _FakeBloomAmount;
 
             v2f vert (const appdata v)
             {
@@ -58,8 +58,8 @@
             {
                 const float4 tex = tex2D(_MainTex, i.avatar_uv);
                 const float glow = i.color.a * tex.a;
-                float3 col = i.color.rgb * tex.rgb * glow;
-                return float4(col, pow(glow, 2.0f));
+                const float4 col = float4(i.color.rgb * tex.rgb * glow, glow);
+                return apply_fake_bloom(col, 0.6f * _FakeBloomAmount);
             }
             ENDCG
         }

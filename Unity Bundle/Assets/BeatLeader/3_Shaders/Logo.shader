@@ -139,6 +139,7 @@
             float _Thickness;
             float _SpinnerRotation;
             float _SpinnerAmplitude;
+            float _FakeBloomAmount;
 
             v2f vert (const appdata v)
             {
@@ -162,7 +163,8 @@
             {
                 const float mask = get_mask_value(i.rotated, _SpinnerAmplitude);
                 const float block_value = mask * get_fade_value(i.rotated, _BlockScale, _CornerRadius, _Thickness);
-                return float4(0, 0, 0, _Glow * block_value * i.color.a);
+                const float4 col = float4(0, 0, 0, _Glow * block_value * i.color.a);
+                return apply_fake_bloom(col, _FakeBloomAmount);
             }
             ENDCG
         }
