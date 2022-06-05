@@ -12,7 +12,6 @@
 		_StencilReadMask ("Stencil Read Mask", Float) = 255
 		
 		_CullMode ("Cull Mode", Float) = 0
-		_ColorMask ("Color Mask", Float) = 15
 		_ClipRect ("Clip Rect", vector) = (-32767, -32767, 32767, 32767)
 
 		[Toggle(UNITY_UI_ALPHACLIP)] _UseUIAlphaClip ("Use Alpha Clip", Float) = 0
@@ -43,7 +42,7 @@
 		ZWrite Off
 		ZTest [unity_GUIZTestMode]
 		Blend SrcAlpha OneMinusSrcAlpha
-		ColorMask [_ColorMask]
+		ColorMask RGB
 
 		Pass
 		{
