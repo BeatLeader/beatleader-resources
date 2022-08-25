@@ -57,8 +57,12 @@
             float4 frag (const v2f i) : SV_Target
             {
                 const float4 tex = tex2D(_MainTex, i.avatar_uv);
-                const float glow = i.color.a * tex.a;
-                const float4 col = float4(i.color.rgb * tex.rgb * glow, glow);
+                
+                const float alpha = min(i.color.a, 0.5f) * 2 * tex.a;
+                const float glow = max(i.color.a - 0.5f, 0) * 2 * tex.a;
+                
+                float4 col = float4(i.color.rgb * tex.rgb, glow);
+                col.rgb *= alpha;
                 return apply_fake_bloom(col, 0.6f * _FakeBloomAmount);
             }
             ENDCG
