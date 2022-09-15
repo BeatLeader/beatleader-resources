@@ -1,5 +1,7 @@
 # beatleader-resources
 
-Logos:
- -Default(requires C4D R25 and Redshift)
- -Earth(requires C4D R25, AE22 and AE22 Plugin Saber)
+Logos requirements:
+
+ Default: C4D R25, Redshift
+
+ Earth:  C4D R25, AE22, AE22 Plugin Saber
