@@ -54,9 +54,9 @@
 
 			#include "UnityCG.cginc"
 			#include "UnityUI.cginc"
-			#include "utils.cginc"
+			#include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
 
-		#pragma multi_compile __ UNITY_UI_CLIP_RECT
+			#pragma multi_compile __ UNITY_UI_CLIP_RECT
             #pragma multi_compile __ UNITY_UI_ALPHACLIP
 			
 			struct appdata_t

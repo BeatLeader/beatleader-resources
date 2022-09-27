@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb916e3be6c4dbfa150878ad0fd54c8, type: 3}
+  m_Name: TheSun
+  m_EditorClassIdentifier: 
+  tier1AvatarFull: {fileID: 2100000, guid: 4b174f1509fe1dc4e950b10fa16d86de, type: 2}
+  tier1AvatarSmall: {fileID: 2100000, guid: 294ae369c11072c4b9a32ec591c32af2, type: 2}
+  tier2AvatarFull: {fileID: 2100000, guid: 79e7c9bce52445f2a9107f8b991966d7, type: 2}
+  tier2AvatarSmall: {fileID: 2100000, guid: 0c2d9ed58eb77004dbc84d2f795fdb6b, type: 2}
+  tier3AvatarFull: {fileID: 2100000, guid: b30a92ea0485e4b4994d8e95b8c16e40, type: 2}
+  tier3AvatarSmall: {fileID: 2100000, guid: 903d3e49e38daf747af665049c16eccc, type: 2}

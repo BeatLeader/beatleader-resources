@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb916e3be6c4dbfa150878ad0fd54c8, type: 3}
+  m_Name: TheMoon
+  m_EditorClassIdentifier: 
+  tier1AvatarFull: {fileID: 2100000, guid: 359b7393281dc084697dbf93fd1dffec, type: 2}
+  tier1AvatarSmall: {fileID: 2100000, guid: ac3ac628dc67f9547967706daaa063c3, type: 2}
+  tier2AvatarFull: {fileID: 2100000, guid: 68aa9da5c96d4c541984f188ea5bf7ec, type: 2}
+  tier2AvatarSmall: {fileID: 2100000, guid: 4bc8db145b90dc54389cc54ec60326f0, type: 2}
+  tier3AvatarFull: {fileID: 2100000, guid: fb9ecdfadfadf594c86ffc2541cb7630, type: 2}
+  tier3AvatarSmall: {fileID: 2100000, guid: 2a739250e2fdc7b48923ef2f70122f90, type: 2}

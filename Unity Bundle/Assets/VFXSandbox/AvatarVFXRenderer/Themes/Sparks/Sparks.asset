@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fdb916e3be6c4dbfa150878ad0fd54c8, type: 3}
+  m_Name: Sparks
+  m_EditorClassIdentifier: 
+  tier1AvatarFull: {fileID: 2100000, guid: 365fad34bb684d34a97cee86641f1d96, type: 2}
+  tier1AvatarSmall: {fileID: 2100000, guid: 1b05609f0880e0d46808add181816b96, type: 2}
+  tier2AvatarFull: {fileID: 2100000, guid: d025e3238d712fb4ebd794ee653a5997, type: 2}
+  tier2AvatarSmall: {fileID: 2100000, guid: 61056b4eeae49a840b3eb33291654f91, type: 2}
+  tier3AvatarFull: {fileID: 2100000, guid: 8b7b728d13ee30d43b02360d262d2075, type: 2}
+  tier3AvatarSmall: {fileID: 2100000, guid: c7cc608ceab4760409aafd91d120b72b, type: 2}

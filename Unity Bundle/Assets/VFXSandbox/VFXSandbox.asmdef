@@ -1,0 +1,15 @@
+{
+    "name": "VFXSandbox",
+    "references": [
+        "GUID:bc85fbca27b0bdb408da901ba973c1c1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
