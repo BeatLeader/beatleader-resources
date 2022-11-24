@@ -34,6 +34,11 @@ float4 apply_fake_bloom(float4 source_color, const float fake_bloom_value)
     );
 }
 
+float map(float val, float inMin, float inMax, float outMin, float outMax)
+{
+    return (val - inMin) * (outMax - outMin) / (inMax - inMin) + outMin;
+}
+
 
 //<------- COLOR CONVERSIONS (from https://www.chilliant.com/rgb2hsv.html) -------------->
 
