@@ -40,6 +40,7 @@
             CGPROGRAM
             #pragma vertex avatar_vertex_shader
             #pragma fragment avatar_fragment_shader
+            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
@@ -58,6 +59,7 @@
             CGPROGRAM
             #pragma vertex avatar_vertex_shader
             #pragma fragment frag
+            #pragma multi_compile_instancing
             
             #include "UnityCG.cginc"
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"

@@ -51,6 +51,7 @@
 			#pragma vertex vert
 			#pragma fragment frag
             #pragma target 2.0
+            #pragma multi_compile_instancing
 
 			#include "UnityCG.cginc"
 			#include "UnityUI.cginc"
@@ -87,6 +88,7 @@
 			{
 				v2f OUT;
                 UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, OUT);
                 UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(OUT);
                 OUT.worldPosition = v.vertex;
 				OUT.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));

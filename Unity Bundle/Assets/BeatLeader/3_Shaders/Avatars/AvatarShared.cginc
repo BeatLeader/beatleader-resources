@@ -7,6 +7,8 @@ struct appdata
     float2 uv0 : TEXCOORD;
     float2 uv1 : TEXCOORD1;
     float2 uv2 : TEXCOORD2;
+
+    UNITY_VERTEX_INPUT_INSTANCE_ID
 };
 
 struct v2f
@@ -16,6 +18,8 @@ struct v2f
     float2 avatar_uv : TEXCOORD0;
     float2 spinner_uv : TEXCOORD1;
     float2 relative_uv : TEXCOORD2;
+
+    UNITY_VERTEX_OUTPUT_STEREO
 };
 
 // <-- VERTEX SHADER ---------------------------------------------
@@ -40,6 +44,11 @@ v2f avatar_vertex_shader (const appdata v)
     const float2 avatar_uv = (relative_uv + 1) / 2;
                 
     v2f o;
+    
+    UNITY_SETUP_INSTANCE_ID(v);
+    UNITY_INITIALIZE_OUTPUT(v2f, o);
+    UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+    
     o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
     o.color = v.color;
     o.avatar_uv = avatar_uv;
