@@ -34,6 +34,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
             #include "UnityCG.cginc"
@@ -45,6 +46,8 @@
                 float2 uv0 : TEXCOORD;
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -54,6 +57,8 @@
                 float2 atlas_uv : TEXCOORD0;
                 float2 spinner_uv : TEXCOORD1;
                 float2 gradient_uv : TEXCOORD2;
+
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             sampler2D _SpinnerTex;
@@ -91,6 +96,11 @@
                 );
                 
                 v2f o;
+                
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.atlas_uv = atlas_uv;
                 o.spinner_uv = spinner_uv;

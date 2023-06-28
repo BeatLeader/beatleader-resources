@@ -27,6 +27,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "Assets/BeatLeader/3_Shaders/Utils/KeijiroNoiseCommon3D.cginc"
             #include "UnityCG.cginc"
@@ -41,6 +42,8 @@
                 float2 uv0 : TEXCOORD;
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -48,6 +51,8 @@
                 float4 vertex : SV_POSITION;
                 float4 vertex_color : COLOR;
                 float2 uv : TEXCOORD0;
+                
+                UNITY_VERTEX_OUTPUT_STEREO
             };
             
             float4 _RimColor;
@@ -69,6 +74,11 @@
                 vertex_pos.y += vertical_offset;
                 
                 v2f o;
+
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                
                 o.vertex = UnityObjectToClipPos(get_curved_position(vertex_pos, v.uv2.x));
                 o.vertex_color = v.color;
                 o.vertex_color.r *= _HighlightTest;
