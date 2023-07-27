@@ -7,6 +7,9 @@
         [HDR] _HaloColor ("HaloColor", Color) = (1, 1, 1, 1)
         
         _Blend ("Blend", Range(0, 1)) = 0.0
+
+        _Speed ("Speed", float) = 0.5
+        _DropOff ("Speed", float) = 0.0
         
         _WavesAmplitude ("WavesAmplitude", Range(0, 2)) = 1
         _WavesConfig ("WavesConfig", Vector) = (0.04, 0.6, 0.8, 1.0)
@@ -59,6 +62,9 @@
             float _TimeOffsetB;
             float _Blend;
             float _IsRendering;
+
+            float _Speed;
+            float _DropOff;
             
             float4 _RimColor;
             float4 _HaloColor;
@@ -86,9 +92,9 @@
 
             float4 get_color(const v2f i, const float time)
             {
-                const float waves = get_waves_value(i.relative_uv, time);
+                const float waves = get_waves_value_with_speed(i.relative_uv, time, _Speed);
                 const float details = get_details_value(i.relative_uv, time);
-                const float shine = waves + details;
+                const float shine = (waves + details) * (_DropOff > 0 ? -i.relative_uv.y * _DropOff : 1.0);
 
                 const float halo_value = pow(shine, 4);
                 const float rim_value = pow(shine, 9);
