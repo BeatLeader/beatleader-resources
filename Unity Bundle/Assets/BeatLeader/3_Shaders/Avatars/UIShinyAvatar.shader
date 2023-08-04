@@ -12,6 +12,9 @@
         [HDR] _HaloColor ("HaloColor", Color) = (1, 1, 1, 1)
         _HueShift ("HueShift", Range(0, 6.28318530718)) = 0
         _Saturation ("Saturation", Range(0, 2)) = 1 
+
+        _Speed ("Speed", float) = 0.5
+        _DropOff ("Speed", float) = 0.0
         
         _WavesConfig ("WavesConfig", Vector) = (0.04, 0.6, 0.8, 1.0)
         _DetailsNoiseRamp ("DetailsNoiseRamp", Vector) = (-1.0, 1.0, 1.0, 1.0)
@@ -72,11 +75,14 @@
             float _HueShift;
             float _Saturation;
 
+            float _Speed;
+            float _DropOff;
+
             float4 frag (const v2f i) : SV_Target
             {
-                const float waves = get_waves_value(i.relative_uv, _Time.y);
+                const float waves = get_waves_value_with_speed(i.relative_uv, _Time.y, _Speed);
                 const float details = get_details_value(i.relative_uv, _Time.y);
-                const float shine = waves + details;
+                const float shine = (waves + details) * (_DropOff > 0 ? -i.relative_uv.y * _DropOff : 1.0);
 
                 const float halo_value = pow(shine, 4);
                 const float rim_value = pow(shine, 9);

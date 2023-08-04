@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6c66675d29834394ac49315dccfc14b8, type: 3}
   m_Name: WebsiteThemesCollection
   m_EditorClassIdentifier: 
-  default: {fileID: 0}
+  booster: {fileID: 11400000, guid: 8329e973137a476408f443cd94d59341, type: 2}
   theSun: {fileID: 11400000, guid: 257941e67ddfe724e9a9a1e49a84774a, type: 2}
   theMoon: {fileID: 11400000, guid: 2b0595da0a26fd8469dd3ece7ad14d65, type: 2}
   theStar: {fileID: 11400000, guid: 53b2ae86d565c6d48a1f2c237e7be5c2, type: 2}

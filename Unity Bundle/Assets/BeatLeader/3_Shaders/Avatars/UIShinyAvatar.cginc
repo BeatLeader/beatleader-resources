@@ -49,14 +49,14 @@ static const float_range small_noise_fade_range = create_range(-0.6, 0.6);
 float _WavesAmplitude;
 float4 _WavesConfig; // x: static_glow,  y: big_noise_amplitude,  z: small_noise_amplitude
 
-float get_waves_value(const float2 relative_uv, const float time)
+float get_waves_value_with_speed(const float2 relative_uv, const float time, const float speed)
 {
     const float big_noise = get_noise_value(
         time,
         relative_uv,
         big_noise_fade_range,
         2.0f,
-        0.5f,
+        speed,
         4.0f,
         _WavesConfig.y
     );
@@ -66,7 +66,7 @@ float get_waves_value(const float2 relative_uv, const float time)
         relative_uv,
         small_noise_fade_range,
         4.0f,
-        0.3f,
+        speed * 0.6f,
         16.0f,
         _WavesConfig.z
     );
@@ -77,6 +77,11 @@ float get_waves_value(const float2 relative_uv, const float time)
     float shine = get_shine_value(distance, glow, 0.5, 0.005, 0.1);
     shine *= get_shine_value(distance, glow, -0.3, -0.001, -0.02);
     return pow(shine, _WavesConfig.w + log(1 / glow));
+}
+
+float get_waves_value(const float2 relative_uv, const float time)
+{
+    return get_waves_value_with_speed(relative_uv, time, 0.5f);
 }
 
 // <-- DETAILS --------------------------------------------->
