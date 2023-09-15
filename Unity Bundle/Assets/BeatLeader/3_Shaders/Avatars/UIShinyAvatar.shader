@@ -14,7 +14,7 @@
         _Saturation ("Saturation", Range(0, 2)) = 1 
 
         _Speed ("Speed", float) = 0.5
-        _DropOff ("Speed", float) = 0.0
+        _DropOff ("DropOff", float) = 0.0
         
         _WavesConfig ("WavesConfig", Vector) = (0.04, 0.6, 0.8, 1.0)
         _DetailsNoiseRamp ("DetailsNoiseRamp", Vector) = (-1.0, 1.0, 1.0, 1.0)
@@ -85,10 +85,14 @@
                 const float halo_value = pow(shine, 4);
                 const float rim_value = pow(shine, 9);
 
-                float4 col = _HaloColor * halo_value + _RimColor * rim_value;
-                col.rgb = transform_rgb(clamp(col.rgb, 0, 1), _HueShift, _Saturation, 0.0);
-                col *= i.color.a;
-                return col;
+                if (shine < 0.01) {
+                    return float4(0.0, 0.0, 0.0, 0.0);
+                } else {
+                    float4 col = _HaloColor * halo_value + _RimColor * rim_value;
+                    col.rgb = transform_rgb(clamp(col.rgb, 0, 1), _HueShift, _Saturation, 0.0);
+                    col *= i.color.a;
+                    return col;
+                }
             }
             ENDCG
         }
