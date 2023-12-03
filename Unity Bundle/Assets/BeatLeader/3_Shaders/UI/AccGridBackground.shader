@@ -25,6 +25,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
 
             #include "UnityCG.cginc"
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
@@ -37,6 +38,8 @@
                 float2 uv0 : TEXCOORD0;
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f
@@ -44,6 +47,8 @@
                 float4 vertex : SV_POSITION;
                 float4 color : COLOR;
                 float2 uv : TEXCOORD0;
+
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             float4 _BackColor;
@@ -55,6 +60,11 @@
                 const float2 scaled_uv = (v.uv1 - float2(0.5f, 0.5f)) * 2.0f;
                 
                 v2f o;
+
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.color = v.color;
                 o.uv = scaled_uv;
