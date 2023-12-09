@@ -1,4 +1,4 @@
-﻿Shader "BeatLeader/TextureSplitterShader"
+﻿Shader "BeatLeader/TextureSplitter"
 {
     Properties
     {
