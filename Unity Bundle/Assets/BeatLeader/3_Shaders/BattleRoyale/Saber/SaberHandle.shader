@@ -55,7 +55,7 @@
                 fixed4 col = _CoreColor * _CoreIntensity;
                 const float y = i.uv.y;
                 if (y > handle_start && y < handle_end) {
-                    col *= _HandleColor;
+                    col = _HandleColor;
                 }
                 
                 return col;
