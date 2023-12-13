@@ -1,37 +1,31 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 
 namespace BeatLeader {
-    public class BattleRoyaleSaberController : MonoBehaviour {
-        #region Serialized
-
-        [SerializeField]
-        private MeshRenderer bladeRenderer;
-
-        [SerializeField]
-        private MeshRenderer handleRenderer;
-
-        #endregion
-
+    public abstract class BattleRoyaleVRController : MonoBehaviour {
         #region Unity Events
 
-        private void Start() {
+        private void Awake() {
             _propertyBlock = new MaterialPropertyBlock();
         }
 
-        private void Update() {
-            UpdateMaterialsIfDirty();
+        private new void Update() {
+            UpdateMaterialIfDirty();
         }
 
         private void OnValidate() {
-            SetPropertyBlockDirty();
+            UpdateMaterialIfDirty();
         }
 
         #endregion
 
         #region Properties
 
-        [SerializeField]
+        [SerializeField] 
         private Color coreColor = Color.red;
+
+        [SerializeField] 
+        private float coreIntensity = 1f;
 
         public Color CoreColor {
             get => coreColor;
@@ -42,11 +36,21 @@ namespace BeatLeader {
             }
         }
 
+        public float CoreIntensity {
+            get => coreIntensity;
+            set {
+                if (Math.Abs(coreIntensity - value) < 0.001) return;
+                coreIntensity = value;
+                SetPropertyBlockDirty();
+            }
+        }
+
         #endregion
 
         #region MaterialPropertyBlock
 
         private static readonly int CoreColorPropertyId = Shader.PropertyToID("_CoreColor");
+        private static readonly int CoreIntensityPropertyId = Shader.PropertyToID("_CoreIntensity");
 
         private MaterialPropertyBlock _propertyBlock;
         private bool _propertyBlockDirty = true;
@@ -55,13 +59,15 @@ namespace BeatLeader {
             _propertyBlockDirty = true;
         }
 
-        private void UpdateMaterialsIfDirty() {
+        private void UpdateMaterialIfDirty() {
             if (!_propertyBlockDirty) return;
             _propertyBlock.SetColor(CoreColorPropertyId, CoreColor);
-            handleRenderer.SetPropertyBlock(_propertyBlock);
-            bladeRenderer.SetPropertyBlock(_propertyBlock);
+            _propertyBlock.SetFloat(CoreIntensityPropertyId, CoreIntensity);
+            ApplyBlock(_propertyBlock);
             _propertyBlockDirty = false;
         }
+
+        protected abstract void ApplyBlock(MaterialPropertyBlock block);
 
         #endregion
     }

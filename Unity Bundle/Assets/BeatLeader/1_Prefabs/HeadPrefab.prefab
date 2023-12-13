@@ -12,6 +12,8 @@ GameObject:
   - component: {fileID: 2906744926000709652}
   - component: {fileID: 9043587207086317825}
   - component: {fileID: 2029626937912608548}
+  - component: {fileID: 771861411361277645}
+  - component: {fileID: 4093483404205043172}
   m_Layer: 0
   m_Name: HeadPrefab
   m_TagString: Untagged
@@ -93,3 +95,30 @@ SphereCollider:
   serializedVersion: 2
   m_Radius: 0.5
   m_Center: {x: 0, y: 0, z: 0}
+--- !u!114 &771861411361277645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056255998491922900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 300d4fe654494eb889b5d27c9884986b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  meshRenderer: {fileID: 9043587207086317825}
+--- !u!114 &4093483404205043172
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3056255998491922900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ba40f3af798ebfe48b6c26e947605404, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coreColor: {r: 1, g: 0, b: 0, a: 1}
+  headRenderer: {fileID: 9043587207086317825}
