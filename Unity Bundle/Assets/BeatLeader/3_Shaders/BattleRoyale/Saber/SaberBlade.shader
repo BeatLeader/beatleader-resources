@@ -17,6 +17,7 @@ Shader "BeatLeader/SaberBlade"
         }
         ZWrite Off
         Blend SrcAlpha OneMinusSrcAlpha
+        ColorMask RGB
 
         Pass
         {
