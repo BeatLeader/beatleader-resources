@@ -88,7 +88,7 @@
                 const float distance = get_super_ellipse_distance_to_circle(i.uv);
                 const float alpha = get_range_ratio_clamped(alpha_range, distance);
                 float4 col = _BackColor;
-                col.a *= alpha;
+                col.a *= i.color.a * alpha;
                 return col;
             }
             ENDCG

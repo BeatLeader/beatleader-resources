@@ -78,7 +78,7 @@
                 
                 float4 col = i.vertex_color;
                 col.xyz *= 0.1f;
-                col.a = distance_fade;
+                col.a *= distance_fade;
                 return col;
             }
             ENDCG
