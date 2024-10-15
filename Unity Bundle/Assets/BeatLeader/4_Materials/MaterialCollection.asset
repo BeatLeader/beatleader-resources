@@ -1,0 +1,22 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ef3cda08de43c2b8b3e2ebee0f5833, type: 3}
+  m_Name: MaterialCollection
+  m_EditorClassIdentifier: 
+  uiBlurMaterial: {fileID: 2100000, guid: 83e0d032b3bb5dc4d99850b932cbdff1, type: 2}
+  uiAdditiveGlowMaterial: {fileID: 2100000, guid: 651b10cafc90cee4a9d50c96037de3af,
+    type: 2}
+  uiNoDepthMaterial: {fileID: 2100000, guid: 2216dccc78e3e9347a9536e07febe91c, type: 2}
+  uiRoundTexture2Material: {fileID: 2100000, guid: 780ae1e586aa32a4aa7b22c6282c6998,
+    type: 2}
+  uiRoundTexture10Material: {fileID: 2100000, guid: 1c23662108e6d5c419703ae40ee6a4b9,
+    type: 2}
