@@ -13,6 +13,8 @@ MonoBehaviour:
   m_Name: MaterialCollection
   m_EditorClassIdentifier: 
   blurMaterial: {fileID: 2100000, guid: fac901c4c8cc44111b3462ffa6eba145, type: 2}
+  blurredBackgroundMaterial: {fileID: 2100000, guid: f0748c89775c03746a712d3d0008cdb0,
+    type: 2}
   plotterMaterial: {fileID: 2100000, guid: 28f4b2efe65204b89887bc539bdfbd3f, type: 2}
   applicatorMaterial: {fileID: 2100000, guid: da34663c2bc0847c484d60ddfa0a5559, type: 2}
   uiAdditiveGlowMaterial: {fileID: 2100000, guid: 651b10cafc90cee4a9d50c96037de3af,

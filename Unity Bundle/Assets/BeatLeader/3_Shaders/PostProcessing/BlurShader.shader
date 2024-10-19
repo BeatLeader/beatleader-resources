@@ -3,9 +3,6 @@ Shader "Unlit/UIBlur"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-        _OverlayTex ("Post-Process Texture", 2D) = "white" {}
-        _Tint ("Tint", Color) = (1, 1, 1, 1)
-        _Overlay ("Overlay", Color) = (0, 0, 0, 0)
         _BlurScale ("BlurScale", Float) = 1
     }
 
@@ -35,31 +32,22 @@ Shader "Unlit/UIBlur"
 
             struct appdata {
                 float4 vertex : POSITION;
-                float2 uv0 : TEXCOORD0;
-                float2 uv1 : TEXCOORD1;
-                float2 uv2 : TEXCOORD2;
+                float2 uv : TEXCOORD0;
             };
 
             struct v2f {
                 float4 vertex : SV_POSITION;
-                float2 grab_uv : TEXCOORD0;
-                float2 mask_uv : TEXCOORD1;
-                float2 local_pos : TEXCOORD2;
+                float2 uv : TEXCOORD0;
             };
-
-            float4 _Tint;
-            float4 _Overlay;
+            
             sampler2D _MainTex;
-            sampler2D _OverlayTex;
-            float4 _OverlayTex_TexelSize;
+            float4 _MainTex_TexelSize;
             float _BlurScale;
 
             v2f vert(appdata v) {
                 v2f o;
                 o.vertex = UnityObjectToClipPos(v.vertex);
-                o.grab_uv = v.uv0;
-                o.mask_uv = v.uv0;
-                o.local_pos = v.vertex.xy;
+                o.uv = v.uv;
                 return o;
             }
 
@@ -79,13 +67,13 @@ Shader "Unlit/UIBlur"
 
             fixed4 frag(v2f i) : SV_Target {
                 const float2 step_size = float2(
-                    _BlurScale * _OverlayTex_TexelSize.x,
-                    _BlurScale * _OverlayTex_TexelSize.y
+                    _BlurScale * _MainTex_TexelSize.x,
+                    _BlurScale * _MainTex_TexelSize.y
                 );
 
                 const float2 start_uv = float2(
-                    i.grab_uv.x - step_size.x * radius,
-                    i.grab_uv.y - step_size.y * radius
+                    i.uv.x - step_size.x * radius,
+                    i.uv.y - step_size.y * radius
                 );
 
                 float4 result = float4(0, 0, 0, 0);
@@ -108,15 +96,13 @@ Shader "Unlit/UIBlur"
                             start_uv.y + step_size.y * y
                         );
 
-                        result += tex2D(_OverlayTex, offset_uv) * weight;
+                        result += tex2D(_MainTex, offset_uv) * weight;
                         divider += weight;
                     }
                 }
 
                 result /= divider;
                 result = clamp(result, 0, 1);
-                result *= _Tint;
-                result += _Overlay;
 
                 return result;
             }
