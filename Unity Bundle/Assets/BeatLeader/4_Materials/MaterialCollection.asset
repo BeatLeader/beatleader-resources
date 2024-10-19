@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 51ef3cda08de43c2b8b3e2ebee0f5833, type: 3}
   m_Name: MaterialCollection
   m_EditorClassIdentifier: 
-  uiBlurMaterial: {fileID: 2100000, guid: 83e0d032b3bb5dc4d99850b932cbdff1, type: 2}
+  blurMaterial: {fileID: 2100000, guid: fac901c4c8cc44111b3462ffa6eba145, type: 2}
+  plotterMaterial: {fileID: 2100000, guid: 28f4b2efe65204b89887bc539bdfbd3f, type: 2}
+  applicatorMaterial: {fileID: 2100000, guid: da34663c2bc0847c484d60ddfa0a5559, type: 2}
   uiAdditiveGlowMaterial: {fileID: 2100000, guid: 651b10cafc90cee4a9d50c96037de3af,
     type: 2}
   uiNoDepthMaterial: {fileID: 2100000, guid: 2216dccc78e3e9347a9536e07febe91c, type: 2}
