@@ -13,14 +13,10 @@ MonoBehaviour:
   m_Name: MaterialCollection
   m_EditorClassIdentifier: 
   blurMaterial: {fileID: 2100000, guid: fac901c4c8cc44111b3462ffa6eba145, type: 2}
+  tintedBlurredBackgroundMaterial: {fileID: 2100000, guid: 1726d31e3f0a14088a5fd5acf983ec1a,
+    type: 2}
   blurredBackgroundMaterial: {fileID: 2100000, guid: f0748c89775c03746a712d3d0008cdb0,
     type: 2}
-  plotterMaterial: {fileID: 2100000, guid: 28f4b2efe65204b89887bc539bdfbd3f, type: 2}
-  applicatorMaterial: {fileID: 2100000, guid: da34663c2bc0847c484d60ddfa0a5559, type: 2}
   uiAdditiveGlowMaterial: {fileID: 2100000, guid: 651b10cafc90cee4a9d50c96037de3af,
     type: 2}
   uiNoDepthMaterial: {fileID: 2100000, guid: 2216dccc78e3e9347a9536e07febe91c, type: 2}
-  uiRoundTexture2Material: {fileID: 2100000, guid: 780ae1e586aa32a4aa7b22c6282c6998,
-    type: 2}
-  uiRoundTexture10Material: {fileID: 2100000, guid: 1c23662108e6d5c419703ae40ee6a4b9,
-    type: 2}
