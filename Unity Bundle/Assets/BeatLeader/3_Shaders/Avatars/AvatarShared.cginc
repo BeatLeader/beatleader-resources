@@ -1,4 +1,12 @@
-﻿// <-- DATA ---------------------------------------------
+﻿#ifndef AVATAR_SHARED_INCLUDED
+#define AVATAR_SHARED_INCLUDED
+
+#include "UnityCG.cginc"
+#include "UnityUI.cginc"
+#include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
+#include "Assets/BeatLeader/3_Shaders/Utils/Range.cginc"
+
+// <-- DATA ---------------------------------------------
 
 struct appdata
 {
@@ -18,6 +26,7 @@ struct v2f
     float2 avatar_uv : TEXCOORD0;
     float2 spinner_uv : TEXCOORD1;
     float2 relative_uv : TEXCOORD2;
+    float2 local_pos : TEXCOORD3;
 
     UNITY_VERTEX_OUTPUT_STEREO
 };
@@ -54,6 +63,7 @@ v2f avatar_vertex_shader (const appdata v)
     o.avatar_uv = avatar_uv;
     o.spinner_uv = spinner_uv;
     o.relative_uv = relative_uv;
+    o.local_pos = v.vertex.xy;
     return o;
 }
 
@@ -63,6 +73,7 @@ sampler2D _AvatarTexture;
 float _FadeValue;
 float4 _BackgroundColor;
 sampler2D _Spinner;
+float4 _ClipRect;
 
 static const float_range angle_fade_range = create_range(1.0, 0.96);
 
@@ -77,5 +88,10 @@ float4 avatar_fragment_shader (const v2f i) : SV_Target
     float4 col = lerp(spinner, avatar, _FadeValue);
     col = alpha_blend(col, _BackgroundColor);
     col.a *= fade * i.color.a;
+    #ifdef UNITY_UI_CLIP_RECT
+    col.a *= UnityGet2DClipping(i.local_pos, _ClipRect);
+    #endif
     return col;
 }
+
+#endif

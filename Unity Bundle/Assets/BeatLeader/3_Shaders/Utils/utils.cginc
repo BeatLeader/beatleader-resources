@@ -1,3 +1,6 @@
+#ifndef UTILS_INCLUDED
+#define UTILS_INCLUDED
+
 float get_signed_super_ellipse_distance(float2 cartesian, float2 power)
 {
     const float2 on_ellipse = float2(
@@ -122,3 +125,5 @@ float3 transform_rgb(float3 rgb, float hue_shift, float saturation, float bright
     float Q = chroma * sin(hue);
     return mul(YIQ_RGB, float3(Y, I, Q));
 }
+
+#endif

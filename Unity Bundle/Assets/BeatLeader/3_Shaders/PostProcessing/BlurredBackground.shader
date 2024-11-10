@@ -21,6 +21,7 @@ Shader "Unlit/UIBlurredBackground" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
 
             #include "UnityCG.cginc"
             #include "UnityUI.cginc"
