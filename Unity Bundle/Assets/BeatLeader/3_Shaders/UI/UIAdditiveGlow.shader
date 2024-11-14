@@ -23,6 +23,7 @@
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
 
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
@@ -35,6 +36,8 @@
                 float2 uv0 : TEXCOORD;
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f {
@@ -42,6 +45,8 @@
                 float4 color : COLOR;
                 float2 avatar_uv : TEXCOORD0;
                 float2 local_pos : TEXCOORD2;
+
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             float4 _ClipRect;
@@ -50,6 +55,11 @@
 
             v2f vert(const appdata v) {
                 v2f o;
+                
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.avatar_uv = v.uv0;
                 o.color = v.color;

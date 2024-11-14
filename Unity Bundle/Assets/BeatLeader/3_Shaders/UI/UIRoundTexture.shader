@@ -25,6 +25,7 @@ Shader "BeatLeader/UIRoundTexture"
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
 
             #include "UnityCG.cginc"
@@ -36,6 +37,8 @@ Shader "BeatLeader/UIRoundTexture"
                 float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
                 float4 vertex : POSITION;
+
+                UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f {
@@ -43,6 +46,8 @@ Shader "BeatLeader/UIRoundTexture"
                 float2 uv : TEXCOORD0;
                 float2 uv1 : TEXCOORD1;
                 float2 local_pos : TEXCOORD2;
+                
+                UNITY_VERTEX_OUTPUT_STEREO
             };
 
             sampler2D _MainTex;
@@ -52,6 +57,11 @@ Shader "BeatLeader/UIRoundTexture"
 
             v2f vert(appdata v) {
                 v2f o;
+                
+                UNITY_SETUP_INSTANCE_ID(v);
+                UNITY_INITIALIZE_OUTPUT(v2f, o);
+                UNITY_INITIALIZE_VERTEX_OUTPUT_STEREO(o);
+                
                 o.pos = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.uv = v.uv;
                 o.uv1 = v.uv1;
