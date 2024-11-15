@@ -1,3 +1,27 @@
+#ifndef UTILS_INCLUDED
+#define UTILS_INCLUDED
+
+float get_signed_super_ellipse_distance(float2 cartesian, float2 power)
+{
+    const float2 on_ellipse = float2(
+        pow(abs(cartesian.x), power.x),
+        pow(abs(cartesian.y), power.y)
+    );
+
+    return length(on_ellipse);
+}
+
+float get_rounded_alpha(const float2 uv, const float radius, const float smooth_size)
+{
+    const float2 adj_uv = abs(uv - float2(0.5, 0.5));
+    const float radius_sub = 0.5 - radius;
+    const float dist_x = max(adj_uv.x - radius_sub, 0.0);
+    const float dist_y = max(adj_uv.y - radius_sub, 0.0);
+    const float dist = length(float2(dist_x, dist_y));
+
+    return smoothstep(0.0, smooth_size, 1.0 - dist / radius);
+}
+
 float3 get_curved_position(const float3 local_pos, const float radius)
 {
     return (radius < 1e-10f)
@@ -101,3 +125,5 @@ float3 transform_rgb(float3 rgb, float hue_shift, float saturation, float bright
     float Q = chroma * sin(hue);
     return mul(YIQ_RGB, float3(Y, I, Q));
 }
+
+#endif

@@ -1,3 +1,6 @@
+#ifndef RANGE_INCLUDED
+#define RANGE_INCLUDED
+
 struct float_range
 {
     float from;
@@ -45,3 +48,5 @@ static float map_ranges_clamped(const float_range from, const float_range to, co
 {
     return slide_range(to, get_range_ratio_clamped(from, value));
 }
+
+#endif
