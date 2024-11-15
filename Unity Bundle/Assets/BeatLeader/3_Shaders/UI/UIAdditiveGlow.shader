@@ -50,6 +50,7 @@
 
             sampler2D _MainTex;
             float _FakeBloomAmount;
+            float4 _ClipRect;
 
             v2f vert (const appdata v)
             {
@@ -61,6 +62,7 @@
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.avatar_uv = v.uv0;
                 o.color = v.color;
+                o.local_pos = v.vertex.xy;
                 return o;
             }
 
@@ -73,6 +75,9 @@
                 
                 float4 col = float4(i.color.rgb * tex.rgb, glow);
                 col.rgb *= alpha;
+                #ifdef UNITY_UI_CLIP_RECT
+                col *= UnityGet2DClipping(i.local_pos, _ClipRect);
+                #endif
                 return apply_fake_bloom(col, 0.6f * _FakeBloomAmount);
             }
             ENDCG

@@ -15,7 +15,6 @@ Shader "BeatLeader/UIRoundTexture"
         }
 
         ZWrite Off
-        ZTest Always
         Cull Off
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask RGB
