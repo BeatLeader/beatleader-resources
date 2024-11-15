@@ -27,6 +27,7 @@
 
             #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
             #include "UnityCG.cginc"
+            #include "UnityUI.cginc"
 
             struct appdata
             {
