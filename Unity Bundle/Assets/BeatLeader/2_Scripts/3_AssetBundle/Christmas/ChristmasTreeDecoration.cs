@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using BeatLeader;
+using UnityEngine;
 
 public class ChristmasTreeDecoration : MonoBehaviour {
     public ChristmasTree christmasTree;
