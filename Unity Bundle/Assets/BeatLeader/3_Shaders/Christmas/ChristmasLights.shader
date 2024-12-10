@@ -7,7 +7,8 @@
             "RenderType"="Opaque"
         }
 
-        ColorMask RGB
+        Blend One Zero
+        BlendOp Add
 
         Pass {
             CGPROGRAM
