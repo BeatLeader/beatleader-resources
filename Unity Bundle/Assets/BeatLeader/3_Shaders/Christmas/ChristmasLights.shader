@@ -1,7 +1,5 @@
-﻿Shader "Unlit/ChristmasTree" {
+﻿Shader "Unlit/ChristmasLights" {
     Properties {
-        _MainTex ("Texture", 2D) = "white" {}
-        _LightsMap ("LightsMap", 2D) = "white" {}
     }
 
     SubShader {
@@ -22,21 +20,31 @@
             struct appdata {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
-                float2 uv : TEXCOORD0;
+                float3 color : COLOR;
                 UNITY_VERTEX_INPUT_INSTANCE_ID
             };
 
             struct v2f {
-                float2 uv : TEXCOORD0;
-                float3 normal : NORMAL;
                 float4 vertex : SV_POSITION;
+                float3 normal : NORMAL;
+                float4 color : COLOR;
                 UNITY_VERTEX_OUTPUT_STEREO
             };
 
-            sampler2D _MainTex;
-            sampler2D _LightsMap;
-
             v2f vert(appdata v) {
+                float3 l = v.color * christmas_lights_cycle();
+                float i = l.r + l.g + l.b;
+                i *= i;
+
+                float3 col;
+                if (v.color.r > 0.9f) {
+                    col = bulb_color_a * i;
+                } else if (v.color.g > 0.9f) {
+                    col = bulb_color_b * i;
+                } else {
+                    col = bulb_color_c * i;
+                }
+                
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
                 UNITY_INITIALIZE_OUTPUT(v2f, o);
@@ -44,21 +52,12 @@
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.normal = UnityObjectToWorldNormal(v.normal);
-                o.uv = v.uv;
+                o.color = float4(col, i);
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target {
-                float4 albedo = tex2D(_MainTex, i.uv);
-                float3 l = tex2D(_LightsMap, i.uv).rgb;
-                l *= christmas_lights_cycle();
-
-                float4 col = albedo;
-                col.rgb = apply_fake_lights(albedo.rgb, i.normal);
-                col.rgb += albedo.rgb * bulb_color_a * l.r;
-                col.rgb += albedo.rgb * bulb_color_b * l.g;
-                col.rgb += albedo.rgb * bulb_color_c * l.b;
-                return col;
+                return i.color;
             }
             ENDCG
         }
