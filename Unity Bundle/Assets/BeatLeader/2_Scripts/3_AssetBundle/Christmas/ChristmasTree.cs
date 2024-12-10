@@ -4,10 +4,17 @@ using UnityEngine;
 namespace BeatLeader {
     public class ChristmasTree : MonoBehaviour {
         [SerializeField] private ChristmasTreeLevel[] _levels;
-        [SerializeField] private CapsuleCollider _collider;
         [SerializeField] private ChristmasTreeAnimator _animator;
+        [SerializeField] private Transform _mesh;
+        [SerializeField] private float _radius;
         public bool gizmos;
 
+        public bool HasAreaContact(Vector3 pos) {
+            var mul = _mesh.localScale;
+            pos = _mesh.InverseTransformPoint(pos);
+            return Mathf.Abs(pos.x) <= _radius * mul.x && Mathf.Abs(pos.z) <= _radius * mul.z;
+        }
+        
         #region Editor
 
         public Vector3 Align(Vector3 pos) {
@@ -30,11 +37,27 @@ namespace BeatLeader {
 
         private void OnDrawGizmos() {
             if (!gizmos) return;
+            DrawCircle(transform.position, _radius, 21);
             foreach (var t in _levels) {
                 t.Draw(transform.lossyScale.x);
             }
         }
 
+        private static void DrawCircle(Vector3 center, float radius, int segments) {
+            var angleStep = 360f / segments;
+            var previousPoint = center + Vector3.right * radius;
+
+            for (var i = 1; i <= segments; i++) {
+                var angle = angleStep * i * Mathf.Deg2Rad;
+                var newPoint = center + new Vector3(Mathf.Cos(angle) * radius, 0, Mathf.Sin(angle) * radius);
+
+                // Draw the circle segment
+                Gizmos.DrawLine(previousPoint, newPoint);
+
+                previousPoint = newPoint;
+            }
+        }
+        
         #endregion
     }
 }
