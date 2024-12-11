@@ -9,7 +9,8 @@
             "RenderType"="Opaque"
         }
 
-        ColorMask RGB
+        Blend One Zero
+        BlendOp Add
 
         Pass {
             CGPROGRAM
@@ -49,16 +50,15 @@
             }
 
             fixed4 frag(v2f i) : SV_Target {
-                float4 albedo = tex2D(_MainTex, i.uv);
+                float3 albedo = tex2D(_MainTex, i.uv).rgb;
                 float3 l = tex2D(_LightsMap, i.uv).rgb;
                 l *= christmas_lights_cycle();
 
-                float4 col = albedo;
-                col.rgb = apply_fake_lights(albedo.rgb, i.normal);
-                col.rgb += albedo.rgb * bulb_color_a * l.r;
-                col.rgb += albedo.rgb * bulb_color_b * l.g;
-                col.rgb += albedo.rgb * bulb_color_c * l.b;
-                return col;
+                float3 col = apply_fake_lights(albedo, i.normal);
+                col += albedo * bulb_color_a * l.r;
+                col += albedo * bulb_color_b * l.g;
+                col += albedo * bulb_color_c * l.b;
+                return float4(col, 0);
             }
             ENDCG
         }

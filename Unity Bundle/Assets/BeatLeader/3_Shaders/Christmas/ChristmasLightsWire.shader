@@ -8,7 +8,8 @@
             "RenderType"="Opaque"
         }
 
-        ColorMask RGB
+        Blend One Zero
+        BlendOp Add
 
         Pass {
             CGPROGRAM
@@ -44,9 +45,8 @@
             }
 
             fixed4 frag(v2f i) : SV_Target {
-                float4 col = float4(0, 0, 0, 0);
-                col.rgb = apply_fake_lights(_Color.rgb, i.normal);
-                return col;
+                float3 col = apply_fake_lights(_Color.rgb, i.normal);
+                return float4(col, 0);
             }
             ENDCG
         }

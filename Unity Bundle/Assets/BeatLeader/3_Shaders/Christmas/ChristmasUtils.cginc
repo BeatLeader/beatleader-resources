@@ -13,15 +13,23 @@ float3 apply_static_light(const float3 albedo, const float3 light_color) {
 float3 apply_fake_lights(const float3 albedo, const float3 normal) {
     float3 col = apply_direction_light(albedo, normal, float3(0, -1, -1), float3(0.6f, 0.67f, 0.79f) * 0.3f);
     col += apply_direction_light(albedo, normal, float3(0, 0, 1), float3(0.016f, 0.016f, 0.22f));
-    col += apply_static_light(albedo, float3(0.01f, 0.01f, 0.03f));
+    col += apply_static_light(albedo, float3(0.04f, 0.04f, 0.06f));
     return col;
 }
 
 //<-- LIGHTS -----------------------------------------------------------------------
 
-static float3 bulb_color_a = float3(1.0f, 0.5f, 0.5f); // Warm pinkish-red
-static float3 bulb_color_b = float3(0.4f, 0.6f, 1.0f); // Muted blue
-static float3 bulb_color_c = float3(1.0f, 0.8f, 0.3f); // Golden yellow
+static float3 bulb_color_a = float3(1.0f, 0.3f, 0.2f); // Warm pinkish-red
+static float3 bulb_color_b = float3(0.3f, 0.5f, 1.0f); // Muted blue
+static float3 bulb_color_c = float3(1.0f, 0.7f, 0.24f); // Golden 
+
+float3 get_bulb_color(float3 intensities) {
+    float3 result = float3(0, 0, 0);
+    result += bulb_color_a * intensities.r;
+    result += bulb_color_b * intensities.g;
+    result += bulb_color_c * intensities.b;
+    return result;
+}
 
 float3 christmas_lights_cycle_1(float time) {
     float red_intensity = abs(sin(time));

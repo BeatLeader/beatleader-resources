@@ -1,19 +1,15 @@
-﻿Shader "Unlit/ChristmasBall"
-{
-    Properties
-    {
+﻿Shader "Unlit/ChristmasBall" {
+    Properties {
         _MainTex ("Texture", 2D) = "white" {}
     }
-    SubShader
-    {
-        Tags
-        {
+    
+    SubShader {
+        Tags {
             "RenderType"="Opaque"
         }
         ColorMask RGB
 
-        Pass
-        {
+        Pass {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag

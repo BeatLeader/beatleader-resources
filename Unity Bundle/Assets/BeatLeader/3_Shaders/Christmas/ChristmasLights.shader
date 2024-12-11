@@ -37,14 +37,7 @@
                 float i = l.r + l.g + l.b;
                 i *= i;
 
-                float3 col;
-                if (v.color.r > 0.9f) {
-                    col = bulb_color_a * i;
-                } else if (v.color.g > 0.9f) {
-                    col = bulb_color_b * i;
-                } else {
-                    col = bulb_color_c * i;
-                }
+                float3 col = get_bulb_color(l) * i;
                 
                 v2f o;
                 UNITY_SETUP_INSTANCE_ID(v);
