@@ -9,6 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 351858151452372848}
+  - component: {fileID: 9152986579459919049}
   m_Layer: 0
   m_Name: Ball_4_Fruit
   m_TagString: Untagged
@@ -32,6 +33,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!65 &9152986579459919049
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 351858151452372851}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.075, y: 0.075, z: 0.01}
+  m_Center: {x: 0, y: -0.067, z: 0}
 --- !u!1 &586423213351670838
 GameObject:
   m_ObjectHideFlags: 0
@@ -93,6 +107,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
+  - {fileID: 2100000, guid: c9a5b96896dc12542958e2c0763c6bd6, type: 2}
   - {fileID: 2100000, guid: 33f5221ef260cac488bdb7f3d099d00a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
