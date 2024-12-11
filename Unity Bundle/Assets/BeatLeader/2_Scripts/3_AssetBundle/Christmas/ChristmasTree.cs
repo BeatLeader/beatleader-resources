@@ -5,6 +5,7 @@ namespace BeatLeader {
     public class ChristmasTree : MonoBehaviour {
         [SerializeField] private ChristmasTreeLevel[] _levels;
         [SerializeField] private ChristmasTreeAnimator _animator;
+        [SerializeField] private ChristmasTreeMover _mover;
         [SerializeField] private Transform _mesh;
         [SerializeField] private float _radius;
         public bool gizmos;
