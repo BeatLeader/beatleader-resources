@@ -11,8 +11,8 @@ float3 apply_static_light(const float3 albedo, const float3 light_color) {
 }
 
 float3 apply_fake_lights(const float3 albedo, const float3 normal) {
-    float3 col = apply_direction_light(albedo, normal, float3(0, -1, -1), float3(0.6f, 0.67f, 0.79f) * 0.3f);
-    col += apply_direction_light(albedo, normal, float3(0, 0, 1), float3(0.016f, 0.016f, 0.22f));
+    float3 col = apply_direction_light(albedo, normal, float3(0, -1, -1), float3(0.6f, 0.67f, 0.79f));
+    col += apply_direction_light(albedo, normal, float3(0, 0, 1), float3(0.08f, 0.08f, 0.34f));
     col += apply_static_light(albedo, float3(0.04f, 0.04f, 0.06f));
     return col;
 }

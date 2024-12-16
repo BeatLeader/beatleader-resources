@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: SponsorCrystal
+  m_Name: Seal
   m_Shader: {fileID: 4800000, guid: e06359366d984d9db81284f5ae841e67, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
@@ -22,6 +22,10 @@ Material:
     m_TexEnvs:
     - _BumpMap:
         m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Cube:
+        m_Texture: {fileID: 8900000, guid: 7e1acf33904eea7448b6f793108c64db, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _DetailAlbedoMap:
@@ -45,7 +49,7 @@ Material:
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 7f43f3a961f1beb41be747de9843f33c, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _MetallicGlossMap:
@@ -66,21 +70,24 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Brightness: 2
+    - _Brightness: 1
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelPower: 0.1
+    - _Emission: 0
+    - _FresnelPower: 2
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
     - _Metallic: 0
+    - _MipLevel: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
-    - _ReflectionFactor: 0.73
-    - _ReflectionFresnel: 1
+    - _ReflectionFactor: 1
+    - _ReflectionFreshnel: 0.5
+    - _ReflectionFresnel: 0.5
     - _ReflectionMipLevel: 0
     - _Reflectivity: 1
     - _SmoothnessTextureChannel: 0
@@ -91,7 +98,8 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ReflectionTint: {r: 1, g: 0, b: 0.5398245, a: 1}
-    - _TextureTint: {r: 1, g: 0, b: 0.6621623, a: 1}
+    - _ReflectionTint: {r: 1, g: 1, b: 1, a: 1}
+    - _TextureTint: {r: 1, g: 1, b: 1, a: 1}
+    - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _TreePosition: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []

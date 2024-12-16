@@ -54,7 +54,7 @@
                 float3 l = tex2D(_LightsMap, i.uv).rgb;
                 l *= christmas_lights_cycle();
 
-                float3 col = apply_fake_lights(albedo, i.normal);
+                float3 col = apply_fake_lights(albedo * 0.5f, i.normal);
                 col += albedo * bulb_color_a * l.r;
                 col += albedo * bulb_color_b * l.g;
                 col += albedo * bulb_color_c * l.b;
