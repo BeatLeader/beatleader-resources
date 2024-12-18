@@ -88,7 +88,7 @@ Material:
     - _ReflectionFactor: 1
     - _ReflectionFreshnel: 0.5
     - _ReflectionFresnel: 3
-    - _ReflectionMipLevel: 4
+    - _ReflectionMipLevel: 0
     - _Reflectivity: 0.8
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1

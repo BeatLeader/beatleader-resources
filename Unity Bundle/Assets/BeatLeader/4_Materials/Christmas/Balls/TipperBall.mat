@@ -76,7 +76,7 @@ Material:
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _Emission: 0
-    - _FresnelPower: 1
+    - _FresnelPower: 0.4
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
@@ -88,7 +88,7 @@ Material:
     - _ReflectionFactor: 1
     - _ReflectionFreshnel: 0.5
     - _ReflectionFresnel: 3
-    - _ReflectionMipLevel: 4
+    - _ReflectionMipLevel: 0
     - _Reflectivity: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -99,7 +99,7 @@ Material:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _ReflectionTint: {r: 1, g: 0.7216981, b: 0.7216981, a: 1}
-    - _TextureTint: {r: 1, g: 0.916421, b: 0.7028302, a: 1}
+    - _TextureTint: {r: 1, g: 0.8214374, b: 0.3537736, a: 1}
     - _Tint: {r: 1, g: 1, b: 1, a: 1}
     - _TreePosition: {r: 0, g: 0, b: 0, a: 1}
   m_BuildTextureStacks: []
