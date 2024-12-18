@@ -82,7 +82,7 @@ Shader "Ree/ChREEstmas" {
 
             //<-- FRAGMENT SHADER -->
             float3 get_env_color(const float4 cubemap_coords, const float3 tree_direction, const float3 lights_cycle) {
-                float tree_direction_factor = saturate(dot(cubemap_coords.xz, tree_direction.xz));
+                float tree_direction_factor = saturate(dot(normalize(cubemap_coords.xz), normalize(tree_direction.xz)));
                 float3 a = texCUBElod(_ReflectionTex, cubemap_coords).rgb;
                 float3 b = texCUBElod(_LightsTex, cubemap_coords).rgb;
                 b = get_bulb_color(b * lights_cycle);

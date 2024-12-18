@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 66a1a2542bf18504f89e6ae4fc2e6a8e
+guid: 0f27540b2227db24b9cb9dded6fa4f7b
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -12,8 +12,13 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: SponsorCrystal
-    second: {fileID: 2100000, guid: 4ca6ddb598f9f5644980d5411a9478f3, type: 2}
+      name: SupporterrBall
+    second: {fileID: 2100000, guid: fa6b2ae38895eae40bb3a32ee1f97a16, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TipperBall
+    second: {fileID: 2100000, guid: fa6b2ae38895eae40bb3a32ee1f97a16, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
