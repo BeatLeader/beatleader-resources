@@ -1,46 +1,34 @@
-﻿using System.Collections;
-using UnityEngine;
-using Random = System.Random;
+﻿using UnityEngine;
 
 namespace BeatLeader {
     public class ChristmasPresent : MonoBehaviour {
-        [SerializeField] private Rigidbody _body;
-        [SerializeField] private Rigidbody _lid;
-        [SerializeField] private ChristmasPresentContent _content;
-        [SerializeField] private Rigidbody _contentRigidBody;
-        [SerializeField] private ParticleSystem _particleSystem;
+        private static readonly int OpenId = Animator.StringToHash("Open");
 
-        private static float GetRandomOffset() {
-            var random = new Random();
-            return random.Next(-10, 10) * 0.1f;
+        [SerializeField] private Animator _animator;
+        [SerializeField] private Transform _toyContainer;
+
+        //TODO: REMOVE BEFORE BUILD
+        [SerializeField] private Transform _toy;
+
+        // Call once user has pressed a trigger/button
+        public void Open() {
+            _animator.SetTrigger(OpenId);
         }
 
-        public IEnumerator Present() {
-            var offset = new Vector3(
-                GetRandomOffset(),
-                GetRandomOffset(),
-                GetRandomOffset()
-            );
-            _lid.AddExplosionForce(1600f, transform.position + offset, 10f, 10f);
-            _body.AddExplosionForce(300f, transform.position, 10f, 10f);
-            _contentRigidBody.AddExplosionForce(1300f, transform.position + offset, 10f, 10f);
-            _contentRigidBody.useGravity = true;
-
-            _particleSystem.Play(true);
-
-            yield return new WaitForSeconds(1.5f);
-            _content.targetPosition = new Vector3(3f, 6f, 0f);
-            _content.enabled = true;
+        // Call once user has pressed a trigger/button after opening
+        public void Dismiss() {
+            _animator.enabled = false;
         }
 
+        public void Present(Transform toy) {
+            toy.SetParent(_toyContainer, false);
+            _animator.Update(0f);
+            _animator.enabled = true;
+        }
+        
+        //TODO: REMOVE BEFORE BUILD
         private void Start() {
-            StartCoroutine(Coroutine());
-        }
-
-        private IEnumerator Coroutine() {
-            _particleSystem.Stop();
-            yield return new WaitForSeconds(1.5f);
-            yield return Present();
+            Present(_toy);
         }
     }
 }
