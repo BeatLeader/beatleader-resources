@@ -3,9 +3,19 @@ guid: 66a1a2542bf18504f89e6ae4fc2e6a8e
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brass
+    second: {fileID: 2100000, guid: c9a5b96896dc12542958e2c0763c6bd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: SponsorCrystal
+    second: {fileID: 2100000, guid: 4ca6ddb598f9f5644980d5411a9478f3, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

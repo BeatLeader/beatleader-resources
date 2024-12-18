@@ -31,6 +31,7 @@ Shader "Ree/ChREEstmas" {
             struct appdata {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
+                float3 color : COLOR;
                 float2 uv : TEXCOORD0;
 
                 UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -39,9 +40,11 @@ Shader "Ree/ChREEstmas" {
             struct v2f {
                 float4 vertex : SV_POSITION;
                 float3 normal : NORMAL;
+                float3 color : COLOR;
                 float2 uv : TEXCOORD0;
                 float3 view_dir : TEXCOORD1;
                 float3 world_pos : TEXCOORD2;
+                float3 christmas_lights_cycle : TEXCOORD3;
 
                 UNITY_VERTEX_OUTPUT_STEREO
             };
@@ -71,45 +74,39 @@ Shader "Ree/ChREEstmas" {
                 o.normal = UnityObjectToWorldNormal(v.normal);
                 o.view_dir = WorldSpaceViewDir(v.vertex);
                 o.world_pos = mul(unity_ObjectToWorld, v.vertex);
+                o.christmas_lights_cycle = christmas_lights_cycle();
+                o.color = v.color * _TextureTint * _Brightness;
                 o.uv = v.uv;
                 return o;
             }
 
             //<-- FRAGMENT SHADER -->
+            float3 get_env_color(const float4 cubemap_coords, const float3 tree_direction, const float3 lights_cycle) {
+                float tree_direction_factor = saturate(dot(cubemap_coords.xz, tree_direction.xz));
+                float3 a = texCUBElod(_ReflectionTex, cubemap_coords).rgb;
+                float3 b = texCUBElod(_LightsTex, cubemap_coords).rgb;
+                b = get_bulb_color(b * lights_cycle);
+                return lerp(a, b, tree_direction_factor);
+            }
+            
             fixed4 frag(v2f i) : SV_Target {
-                // Calculate reflection parameters
+                // Calculate parameters
                 i.normal = normalize(i.normal);
                 i.view_dir = normalize(i.view_dir);
                 float3 reflection_dir = reflect(-i.view_dir, i.normal);
-                float2 tree_to_fragment = normalize(_TreePosition.xz - i.world_pos.xz);
-                float tree_reflection_factor = saturate(dot(reflection_dir.xz, tree_to_fragment));
+                float3 tree_dir = normalize(_TreePosition - i.world_pos);
                 float reflectivity = pow(1.0 - saturate(dot(i.view_dir, i.normal)), _FresnelPower);
                 reflectivity = lerp(0.04, 1.0, reflectivity) * _Reflectivity;
 
-                // Sample textures
-                const float3 albedo = tex2D(_MainTex, i.uv) * _TextureTint * _Brightness;
-                const float3 environment = texCUBElod(_ReflectionTex, float4(reflection_dir, _ReflectionMipLevel)) * _ReflectionTint;
-                float3 reflected_lights = texCUBElod(_LightsTex, float4(reflection_dir, _ReflectionMipLevel)).rgb;
-                float3 diffused_lights = texCUBElod(_LightsTex, float4(reflection_dir, 5)).rgb;
-
-                // Set lights color
-                float3 cycle = christmas_lights_cycle();
-                reflected_lights = get_bulb_color(reflected_lights * cycle) * _ReflectionTint * tree_reflection_factor;
-                diffused_lights = get_bulb_color(diffused_lights * cycle) * tree_reflection_factor;
+                // Calculate color
+                const float3 albedo = tex2D(_MainTex, i.uv) * i.color;
+                const float3 diffuse = get_env_color(float4(i.normal, 6), tree_dir, i.christmas_lights_cycle);
+                const float3 specular = get_env_color(float4(reflection_dir, _ReflectionMipLevel), tree_dir, i.christmas_lights_cycle);
                 
-                // Calculate bloom effect glow
-                float glow = reflected_lights.r + reflected_lights.g + reflected_lights.b;
-                glow *= 0.5f * reflectivity;
-
-                // Apply Lights
                 float3 col = apply_fake_lights(albedo, i.normal);
-                col += apply_static_light(albedo, diffused_lights);
-                
-                // Apply Reflections
-                float3 reflection_col = lerp(environment, reflected_lights, tree_reflection_factor);
-                col = lerp(col, reflection_col, reflectivity);
-
-                return float4(col, glow);
+                col += apply_static_light(albedo, diffuse);
+                col = lerp(col, specular * _ReflectionTint, reflectivity);
+                return float4(col, 0);
             }
             ENDCG
         }

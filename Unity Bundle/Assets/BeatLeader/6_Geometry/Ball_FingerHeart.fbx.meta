@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 17e11695ee3177744bfc6c758b1ba1f6
+guid: c071f36dd32285e4aa1aa44cdeb4f6f7
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
@@ -12,8 +12,8 @@ ModelImporter:
   - first:
       type: UnityEngine:Material
       assembly: UnityEngine.CoreModule
-      name: Ribbon
-    second: {fileID: 2100000, guid: 09caeef5332c6034491b98e5155df658, type: 2}
+      name: FingerHeart
+    second: {fileID: 2100000, guid: 22627f4c8fffa7747b2362055113c3df, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -78,7 +78,7 @@ ModelImporter:
     secondaryUVPackMargin: 4
     useFileScale: 1
   tangentSpace:
-    normalSmoothAngle: 180
+    normalSmoothAngle: 60
     normalImportMode: 0
     tangentImportMode: 3
     normalCalculationMode: 4

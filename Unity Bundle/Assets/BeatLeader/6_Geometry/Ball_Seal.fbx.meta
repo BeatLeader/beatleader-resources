@@ -3,9 +3,24 @@ guid: fff3b1685d19fb6418cbc0c2fdaa6c26
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brass
+    second: {fileID: 2100000, guid: c9a5b96896dc12542958e2c0763c6bd6, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LED_Light
+    second: {fileID: 2100000, guid: 1999e6782840dd049815725c21ce26cf, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Seal
+    second: {fileID: 2100000, guid: 3b7bebb0948d570468c23f112995b16f, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1

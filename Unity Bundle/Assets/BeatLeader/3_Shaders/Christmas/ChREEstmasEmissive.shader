@@ -19,11 +19,11 @@ Shader "Ree/ChREEstmasEmissive" {
             #pragma fragment frag
 
             #include "UnityCG.cginc"
-            #include "ChristmasUtils.cginc"
 
             struct appdata {
                 float4 vertex : POSITION;
                 float3 normal : NORMAL;
+                float3 color : COLOR;
                 float2 uv : TEXCOORD0;
 
                 UNITY_VERTEX_INPUT_INSTANCE_ID
@@ -32,6 +32,7 @@ Shader "Ree/ChREEstmasEmissive" {
             struct v2f {
                 float4 vertex : SV_POSITION;
                 float3 normal : NORMAL;
+                float3 color : COLOR;
                 float2 uv : TEXCOORD0;
 
                 UNITY_VERTEX_OUTPUT_STEREO
@@ -49,12 +50,13 @@ Shader "Ree/ChREEstmasEmissive" {
 
                 o.vertex = UnityObjectToClipPos(v.vertex);
                 o.normal = UnityObjectToWorldNormal(v.normal);
+                o.color = v.color * _TextureTint;
                 o.uv = v.uv;
                 return o;
             }
 
             fixed4 frag(v2f i) : SV_Target {
-                float3 col = tex2D(_MainTex, i.uv) * _TextureTint;
+                float3 col = tex2D(_MainTex, i.uv) * i.color;
                 return float4(col, _Glow);
             }
             ENDCG
