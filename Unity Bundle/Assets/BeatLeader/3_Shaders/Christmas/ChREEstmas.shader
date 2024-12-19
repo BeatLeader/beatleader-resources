@@ -24,6 +24,7 @@ Shader "Ree/ChREEstmas" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile _ PREVIEW_RENDERER
 
             #include "UnityCG.cginc"
             #include "ChristmasUtils.cginc"
@@ -106,7 +107,12 @@ Shader "Ree/ChREEstmas" {
                 float3 col = apply_fake_lights(albedo, i.normal);
                 col += apply_static_light(albedo, diffuse);
                 col = lerp(col, specular * _ReflectionTint, reflectivity);
+
+                #ifdef PREVIEW_RENDERER
+                return float4(col, 1);
+                #else
                 return float4(col, 0);
+                #endif
             }
             ENDCG
         }

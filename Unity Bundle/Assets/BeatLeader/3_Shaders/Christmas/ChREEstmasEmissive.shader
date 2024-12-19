@@ -17,6 +17,7 @@ Shader "Ree/ChREEstmasEmissive" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile _ PREVIEW_RENDERER
 
             #include "UnityCG.cginc"
 
@@ -57,7 +58,12 @@ Shader "Ree/ChREEstmasEmissive" {
 
             fixed4 frag(v2f i) : SV_Target {
                 float3 col = tex2D(_MainTex, i.uv) * i.color;
+
+                #ifdef PREVIEW_RENDERER
+                return float4(col, 1);
+                #else
                 return float4(col, _Glow);
+                #endif
             }
             ENDCG
         }
