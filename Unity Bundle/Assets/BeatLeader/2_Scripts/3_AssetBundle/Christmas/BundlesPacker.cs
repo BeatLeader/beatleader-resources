@@ -42,6 +42,7 @@ public class BundlesPacker : MonoBehaviour {
             }
 
             var obj = Instantiate(prefab, transform, false);
+            obj.transform.localPosition = new Vector3(0, 0, 0.1f);
             obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
             cam.Render();
 
@@ -59,12 +60,51 @@ public class BundlesPacker : MonoBehaviour {
         texture2d.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture2d.Apply();
 
+        // Blur(texture2d, 40);
+        ToGamma(texture2d);
+
+        var bytes = texture2d.EncodeToPNG();
+        File.WriteAllBytes(path, bytes);
+        Debug.Log($"Saved to: {path}");
+        Destroy(texture2d);
+    }
+
+    private static void ToGamma(Texture2D texture2d) {
+        var colors = texture2d.GetPixels();
+
+        for (var i = 0; i < colors.Length; i++) {
+            var tmp = colors[i];
+            tmp = tmp.gamma;
+            colors[i] = tmp;
+        }
+
+        var max = 1.0f;
+        for (var i = 0; i < colors.Length; i++) {
+            var tmp = colors[i];
+            if (tmp.r > max) max = tmp.r;
+            if (tmp.g > max) max = tmp.g;
+            if (tmp.b > max) max = tmp.b;
+        }
+
+        for (var i = 0; i < colors.Length; i++) {
+            var tmp = colors[i];
+            tmp.r /= max;
+            tmp.g /= max;
+            tmp.b /= max;
+            tmp.a /= max;
+            colors[i] = tmp;
+        }
+
+        texture2d.SetPixels(colors);
+        texture2d.Apply();
+    }
+
+    private static void Blur(Texture2D texture2d, int radius) {
         var width = texture2d.width;
         var height = texture2d.height;
         var originalColors = texture2d.GetPixels();
         var blurredColors = new Color[originalColors.Length];
 
-        var radius = 40; // Radius of the Gaussian blur
         var sigma = radius / 2.0f; // Standard deviation
         var twoSigmaSquare = 2 * sigma * sigma;
         var sigmaRoot = Mathf.Sqrt(twoSigmaSquare * Mathf.PI);
@@ -115,12 +155,6 @@ public class BundlesPacker : MonoBehaviour {
 
         texture2d.SetPixels(blurredColors);
         texture2d.Apply();
-
-
-        var bytes = texture2d.EncodeToPNG();
-        File.WriteAllBytes(path, bytes);
-        Debug.Log($"Saved to: {path}");
-        Destroy(texture2d);
     }
 
     private void OnDestroy() {
