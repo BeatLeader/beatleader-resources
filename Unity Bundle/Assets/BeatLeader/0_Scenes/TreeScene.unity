@@ -226,7 +226,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!64 &50319427
 MeshCollider:
   m_ObjectHideFlags: 0
@@ -595,7 +595,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!33 &2282239941588107134
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -817,8 +817,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c358ce0f933afe941a43cca6288c9993, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _body: {fileID: 0}
-  _lid: {fileID: 0}
+  _animator: {fileID: 0}
+  _toyContainer: {fileID: 0}
   _toy: {fileID: 0}
 --- !u!95 &4561614471115356239
 Animator:
@@ -884,6 +884,75 @@ Transform:
   m_Father: {fileID: 4561614471115356237}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1001 &5726527884670754809
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 5726527884481561456, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_Name
+      value: GlassEffectController
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 7
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5726527884481561458, guid: f74d5825aef5daf4eb62c165d885a225,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f74d5825aef5daf4eb62c165d885a225, type: 3}
 --- !u!1001 &6948735274939437386
 PrefabInstance:
   m_ObjectHideFlags: 0
