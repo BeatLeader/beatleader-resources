@@ -1,8 +1,9 @@
-Shader "Ree/ChREEstmas" {
+﻿Shader "Ree/ChREEstmasGlass" {
     Properties {
         _MainTex ("Texture", 2D) = "white" {}
         _TextureTint ("TextureTint", Color) = (1, 1, 1, 1)
         _Brightness ("Brightness", Range(0, 4)) = 1
+        _Alpha ("Alpha", Range(0, 1)) = 0
 
         _ReflectionTex("ReflectionTex", Cube) = "_Skybox" {}
         _LightsTex("LightsTex", Cube) = "black" {}
@@ -14,11 +15,14 @@ Shader "Ree/ChREEstmas" {
 
     SubShader {
         Tags {
-            "RenderType"="Opaque"
+            "RenderType"="Transparent"
+            "Queue"="Transparent"
         }
 
-        Blend One Zero
+        Blend SrcAlpha OneMinusSrcAlpha
         BlendOp Add
+        ColorMask RGB
+//        ColorMask RGBA
 
         Pass {
             CGPROGRAM
@@ -56,6 +60,7 @@ Shader "Ree/ChREEstmas" {
             sampler2D _MainTex;
             float4 _TextureTint;
             float _Brightness;
+            float _Alpha;
             samplerCUBE _ReflectionTex;
             samplerCUBE _LightsTex;
             float4 _ReflectionTint;
@@ -90,7 +95,7 @@ Shader "Ree/ChREEstmas" {
                 b = get_bulb_color(b * lights_cycle);
                 return lerp(a, b, tree_direction_factor);
             }
-            
+
             fixed4 frag(v2f i) : SV_Target {
                 // Calculate parameters
                 i.normal = normalize(i.normal);
@@ -104,16 +109,13 @@ Shader "Ree/ChREEstmas" {
                 const float3 albedo = tex2D(_MainTex, i.uv) * i.color;
                 const float3 diffuse = get_env_color(float4(i.normal, 6), tree_dir, i.christmas_lights_cycle);
                 const float3 specular = get_env_color(float4(reflection_dir, _ReflectionMipLevel), tree_dir, i.christmas_lights_cycle);
-                
+
                 float3 col = apply_fake_lights(albedo, i.normal);
                 col += apply_static_light(albedo, diffuse);
                 col = lerp(col, specular * _ReflectionTint, reflectivity);
-                
-                #ifdef PREVIEW_RENDERER //ignore this keyword in ThreeJS
-                return float4(col, 1);
-                #else
-                return float4(col, 0);
-                #endif
+
+                float alpha = lerp(_Alpha, 1, reflectivity * reflectivity);
+                return float4(col, alpha);
             }
             ENDCG
         }

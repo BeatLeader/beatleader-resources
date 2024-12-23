@@ -46,7 +46,9 @@ public class BundlesPacker : MonoBehaviour {
             obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
             cam.Render();
 
-            SaveTexture(_renderTexture, $@"{targetDirectory}{prefab.name}_preview.png");
+            SaveTexture(_renderTexture, $"{targetDirectory}{prefab.name}_preview.png", 40);
+            SaveTexture(_renderTexture, $"{targetDirectory}{prefab.name}_preview_clear.png", 0);
+            
             Destroy(obj);
         }
 
@@ -54,13 +56,13 @@ public class BundlesPacker : MonoBehaviour {
         Debug.Log("Done!!!!!!!!");
     }
 
-    private static void SaveTexture(RenderTexture renderTexture, string path) {
+    private static void SaveTexture(RenderTexture renderTexture, string path, int blurRadius) {
         var texture2d = new Texture2D(renderTexture.width, renderTexture.height);
         RenderTexture.active = renderTexture;
         texture2d.ReadPixels(new Rect(0, 0, renderTexture.width, renderTexture.height), 0, 0);
         texture2d.Apply();
 
-        // Blur(texture2d, 40);
+        if (blurRadius > 0) Blur(texture2d, blurRadius);
         ToGamma(texture2d);
 
         var bytes = texture2d.EncodeToPNG();

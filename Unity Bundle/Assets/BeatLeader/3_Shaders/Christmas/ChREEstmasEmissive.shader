@@ -17,6 +17,7 @@ Shader "Ree/ChREEstmasEmissive" {
             CGPROGRAM
             #pragma vertex vert
             #pragma fragment frag
+            #pragma multi_compile_instancing
             #pragma multi_compile _ PREVIEW_RENDERER
 
             #include "UnityCG.cginc"
