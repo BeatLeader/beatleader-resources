@@ -7,8 +7,8 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Star
-  m_Shader: {fileID: 4800000, guid: e06359366d984d9db81284f5ae841e67, type: 3}
+  m_Name: StarLight
+  m_Shader: {fileID: 4800000, guid: e8e68752d8db4d0bbe59427c1ccb56b3, type: 3}
   m_ValidKeywords: []
   m_InvalidKeywords: []
   m_LightmapFlags: 4
@@ -71,17 +71,18 @@ Material:
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
-    - _FresnelPower: 0.2
+    - _FresnelPower: 4
     - _GlossMapScale: 1
     - _Glossiness: 0.5
     - _GlossyReflections: 1
+    - _Glow: 0.4
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
     - _Parallax: 0.02
     - _ReflectionFactor: 1
     - _ReflectionFresnel: 2
-    - _ReflectionMipLevel: 2
+    - _ReflectionMipLevel: 3
     - _Reflectivity: 1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
@@ -91,6 +92,6 @@ Material:
     m_Colors:
     - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
-    - _ReflectionTint: {r: 1, g: 0.9836673, b: 0.3820755, a: 1}
-    - _TextureTint: {r: 1, g: 0.771629, b: 0, a: 1}
+    - _ReflectionTint: {r: 0.45680794, g: 1, b: 0.2216981, a: 1}
+    - _TextureTint: {r: 0.003942547, g: 0.066037714, b: 0, a: 1}
   m_BuildTextureStacks: []

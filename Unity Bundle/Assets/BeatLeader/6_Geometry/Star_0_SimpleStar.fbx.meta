@@ -3,9 +3,24 @@ guid: 3f599844c7c85a545abc62cbeebd64fb
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Brass
+    second: {fileID: 2100000, guid: 8b57359907a31634e918bcfa6f619cbb, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LED_Light
+    second: {fileID: 2100000, guid: b9da0921d705c3349ac5befebbefa68f, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: StarBase
+    second: {fileID: 2100000, guid: b9da0921d705c3349ac5befebbefa68f, type: 2}
   materials:
-    materialImportMode: 0
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
     materialLocation: 1
