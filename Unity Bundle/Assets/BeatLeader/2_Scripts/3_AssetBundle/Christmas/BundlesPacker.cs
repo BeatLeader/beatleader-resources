@@ -5,7 +5,7 @@ using UnityEngine;
 
 public class BundlesPacker : MonoBehaviour {
     public Transform smol;
-    
+
     public Camera cam;
     public GameObject[] prefabs;
 
@@ -33,9 +33,11 @@ public class BundlesPacker : MonoBehaviour {
             fileInfo.Delete();
         }
         
+        // yield return new WaitForSeconds(4.1f);
+
         var n = 0;
         foreach (var prefab in prefabs) {
-            if (++n != 8) continue;
+            if (++n != 11) continue;
             if (prefab == null) continue;
             yield return new WaitForSeconds(0.1f);
 
@@ -45,15 +47,15 @@ public class BundlesPacker : MonoBehaviour {
                 break;
             }
 
-            // var obj = Instantiate(prefab, transform, false);
-            var obj = Instantiate(prefab, smol, false);
+            var obj = Instantiate(prefab, transform, false);
+            // var obj = Instantiate(prefab, smol, false);
             obj.transform.localPosition = new Vector3(0, 0, 0.1f);
             obj.transform.localRotation = Quaternion.Euler(0, 180, 0);
             cam.Render();
 
             SaveTexture(_renderTexture, $"{targetDirectory}{prefab.name}_preview.png", 40);
             SaveTexture(_renderTexture, $"{targetDirectory}{prefab.name}_preview_clear.png", 0);
-            
+
             Destroy(obj);
         }
 
