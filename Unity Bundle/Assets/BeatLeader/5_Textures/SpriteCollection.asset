@@ -24,6 +24,8 @@ MonoBehaviour:
     type: 3}
   backgroundTop: {fileID: 7568470200236749842, guid: 4a67ea254adfcda4c862b1ec057558bb,
     type: 3}
+  backgroundRightBottom: {fileID: -522190706, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
   backgroundUnderline: {fileID: 21300000, guid: 334a806e0f98549408d9053129c94184,
     type: 3}
   homeIcon: {fileID: 21300000, guid: 3c963584fc95492197081e501b113f59, type: 3}

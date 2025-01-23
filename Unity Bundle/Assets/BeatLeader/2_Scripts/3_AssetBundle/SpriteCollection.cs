@@ -10,6 +10,7 @@ namespace BeatLeader {
         public Sprite backgroundRight;
         public Sprite backgroundBottom;
         public Sprite backgroundTop;
+        public Sprite backgroundRightBottom;
         public Sprite backgroundUnderline;
         /* Icons */
         [Space] [Header("Icons")]

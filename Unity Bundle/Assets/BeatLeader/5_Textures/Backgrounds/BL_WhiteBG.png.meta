@@ -256,6 +256,27 @@ TextureImporter:
       indices: 
       edges: []
       weights: []
+    - serializedVersion: 2
+      name: BL_WhiteBG_RightBottom
+      rect:
+        serializedVersion: 2
+        x: 272
+        y: 0
+        width: 128
+        height: 128
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 128, z: 128, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 36ae37f57ed3749418a0c5273ee986e5
+      internalID: -522190706
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
     outline: []
     physicsShape: []
     bones: []
@@ -269,6 +290,7 @@ TextureImporter:
     nameFileIdTable:
       BL_WhiteBG: -7085813192073255316
       BL_WhiteBG_Center: -8927863225089740073
+      BL_WhiteBG_RightBottom: -522190706
       BL_WhiteBG_RoundBottom: 8993675878711626502
       BL_WhiteBG_RoundTop: 7568470200236749842
   mipmapLimitGroupName: 
