@@ -42,5 +42,6 @@ MonoBehaviour:
   ascendingIcon: {fileID: 21300000, guid: 36c46353840b3db479335b07d19798ae, type: 3}
   descendingIcon: {fileID: 21300000, guid: 5136e37b804b09143bff2b1811ddcd54, type: 3}
   triangleIcon: {fileID: 21300000, guid: 945e6e9bc3136574c8a90ecff018562c, type: 3}
+  checkIcon: {fileID: 21300000, guid: 559ed2d61debb7740a2050951ad60adf, type: 3}
   glare: {fileID: 21300000, guid: 5aa446c8f2f2f684caa680a201621ff9, type: 3}
   transparentPixel: {fileID: 21300000, guid: 0ec8ecd727768184097dfb8f07e0d96a, type: 3}
