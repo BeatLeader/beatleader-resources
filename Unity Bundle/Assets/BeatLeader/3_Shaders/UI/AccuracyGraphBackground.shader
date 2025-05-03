@@ -52,6 +52,7 @@
             struct v2f
             {
                 float4 vertex : SV_POSITION;
+                float4 vertex_color : COLOR;
                 float2 normalized_pos : TEXCOORD0;
 
                 UNITY_VERTEX_OUTPUT_STEREO
@@ -73,6 +74,7 @@
                 
                 o.vertex = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.normalized_pos = normalized_pos;
+                o.vertex_color = v.color;
                 return o;
             }
 
@@ -82,7 +84,7 @@
                 fade *= get_range_ratio_clamped(fade_range, abs(i.normalized_pos.y));
                 float4 col = _BackgroundColor;
                 col.a *= fade;
-                return col;
+                return col * i.vertex_color.a;
             }
             ENDCG
         }
@@ -215,7 +217,7 @@
                 col = lerp(col, _TenPercentLineColor, ten_percent_line_value * horizontal_line_fade);
                 col = lerp(col, _CursorLineColor, cursor_line_value);
                 col *= fade;
-                return apply_fake_bloom(col, _FakeBloomAmount);
+                return apply_fake_bloom(col, _FakeBloomAmount) * i.vertex_color.a * i.vertex_color.a;
             }
             ENDCG
         }
