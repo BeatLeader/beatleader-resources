@@ -118,10 +118,7 @@
                     color = _MissingExpColor;
                 }
 
-                if (_Highlight > 0.5)
-                {
-                    color = lerp(color, _HighlightColor, 0.3);
-                }
+                color = lerp(color, _HighlightColor, _Highlight);
 
                 const float distance = get_super_ellipse_distance_to_circle(i.uv);
                 const float alpha = get_range_ratio_clamped(alpha_range, distance);
