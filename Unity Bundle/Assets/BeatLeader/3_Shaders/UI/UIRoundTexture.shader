@@ -15,6 +15,7 @@ Shader "BeatLeader/UIRoundTexture"
         }
 
         ZWrite Off
+        ZTest Always
         Cull Off
         Blend SrcAlpha OneMinusSrcAlpha
         ColorMask RGB
@@ -33,6 +34,7 @@ Shader "BeatLeader/UIRoundTexture"
 
             struct appdata {
                 float2 uv : TEXCOORD0;
+                float2 uv1 : TEXCOORD1;
                 float2 uv2 : TEXCOORD2;
                 float4 vertex : POSITION;
 
@@ -42,6 +44,7 @@ Shader "BeatLeader/UIRoundTexture"
             struct v2f {
                 float4 pos : SV_POSITION;
                 float2 uv : TEXCOORD0;
+                float2 uv1 : TEXCOORD1;
                 float2 local_pos : TEXCOORD2;
                 
                 UNITY_VERTEX_OUTPUT_STEREO
@@ -61,13 +64,13 @@ Shader "BeatLeader/UIRoundTexture"
                 
                 o.pos = UnityObjectToClipPos(get_curved_position(v.vertex, v.uv2.x));
                 o.uv = v.uv;
+                o.uv1 = v.uv1;
                 o.local_pos = v.vertex.xy;
                 return o;
             }
 
             fixed4 frag(const v2f i): SV_Target {
-                const float alpha = get_rounded_alpha(i.uv, _Radius, _EdgeSmoothSize);
-
+                const float alpha = get_rounded_alpha(i.uv1, _Radius, _EdgeSmoothSize);
                 fixed4 col = tex2D(_MainTex, i.uv);
                 col.a *= alpha;
                 #ifdef UNITY_UI_CLIP_RECT

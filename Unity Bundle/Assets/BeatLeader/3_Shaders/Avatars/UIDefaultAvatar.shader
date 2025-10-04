@@ -29,10 +29,8 @@
             #pragma vertex avatar_vertex_shader
             #pragma fragment avatar_fragment_shader
             #pragma multi_compile_instancing
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
 
-            #include "UnityCG.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/Range.cginc"
             #include "AvatarShared.cginc"
             ENDCG
         }

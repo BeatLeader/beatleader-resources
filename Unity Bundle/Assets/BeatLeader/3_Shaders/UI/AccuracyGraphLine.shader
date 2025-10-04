@@ -78,7 +78,7 @@
                 float fade = get_range_ratio_clamped(fade_range, abs(i.normalized_pos.x));
                 fade *= get_range_ratio_clamped(fade_range, abs(i.normalized_pos.y));
                 fade *= get_range_ratio_clamped(line_aa_range, abs(i.uv.x));
-                return apply_fake_bloom(_Color * fade, 0.6f * _FakeBloomAmount);
+                return apply_fake_bloom(_Color * fade, 0.6f * _FakeBloomAmount) * i.vertex_color.a;
             }
             ENDCG
         }

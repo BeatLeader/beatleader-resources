@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cc69a054e53936e458bcbdeb4227f99c, type: 3}
+  m_Name: SpriteCollection
+  m_EditorClassIdentifier: 
+  rectangle: {fileID: -8927863225089740073, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  background: {fileID: -7085813192073255316, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundLeft: {fileID: 7238848813982022969, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundRight: {fileID: -8235592665935716388, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundBottom: {fileID: 8993675878711626502, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundTop: {fileID: 7568470200236749842, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundRightBottom: {fileID: -522190706, guid: 4a67ea254adfcda4c862b1ec057558bb,
+    type: 3}
+  backgroundUnderline: {fileID: 21300000, guid: 334a806e0f98549408d9053129c94184,
+    type: 3}
+  homeIcon: {fileID: 21300000, guid: 3c963584fc95492197081e501b113f59, type: 3}
+  spinnerIcon: {fileID: 21300000, guid: 2b51f2f1f850ac044998e617fe7d302b, type: 3}
+  trashIcon: {fileID: 21300000, guid: 4df21eb5ebb8db145b0f8fe44bd2eed0, type: 3}
+  editIcon: {fileID: 21300000, guid: 6ba2b347a9271db43aeb9811a6a21315, type: 3}
+  curvatureIcon: {fileID: 21300000, guid: eeecaad4a2c929f4ba45789b7996240d, type: 3}
+  snapIcon: {fileID: 21300000, guid: b55573e51b31d51408e64bdfafd51a1e, type: 3}
+  pinIcon: {fileID: 21300000, guid: 22dc42b4cd4824b40ae22da501aa143e, type: 3}
+  crossIcon: {fileID: 21300000, guid: 4fd902cdaa762fa49af862646b5ea6e1, type: 3}
+  rightArrowIcon: {fileID: 21300000, guid: 3bd185e9e98dbcd4b87c1f14805b0ba0, type: 3}
+  plusIcon: {fileID: 21300000, guid: 0a6b49bab57b5db47a167fc6a1b736de, type: 3}
+  minusIcon: {fileID: 21300000, guid: f17d41d78058c2945bc5dbf5751638ef, type: 3}
+  ascendingIcon: {fileID: 21300000, guid: 36c46353840b3db479335b07d19798ae, type: 3}
+  descendingIcon: {fileID: 21300000, guid: 5136e37b804b09143bff2b1811ddcd54, type: 3}
+  triangleIcon: {fileID: 21300000, guid: 945e6e9bc3136574c8a90ecff018562c, type: 3}
+  checkIcon: {fileID: 21300000, guid: 559ed2d61debb7740a2050951ad60adf, type: 3}
+  inactiveCheckIcon: {fileID: 21300000, guid: 1fc86013a72351f469360fea598ae88b, type: 3}
+  glare: {fileID: 21300000, guid: 5aa446c8f2f2f684caa680a201621ff9, type: 3}
+  transparentPixel: {fileID: 21300000, guid: 0ec8ecd727768184097dfb8f07e0d96a, type: 3}

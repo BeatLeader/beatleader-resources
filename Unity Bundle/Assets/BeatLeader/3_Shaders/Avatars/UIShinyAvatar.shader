@@ -44,10 +44,8 @@
             #pragma vertex avatar_vertex_shader
             #pragma fragment avatar_fragment_shader
             #pragma multi_compile_instancing
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
 
-            #include "UnityCG.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/Range.cginc"
             #include "AvatarShared.cginc"
             ENDCG
         }
@@ -63,10 +61,8 @@
             #pragma vertex avatar_vertex_shader
             #pragma fragment frag
             #pragma multi_compile_instancing
+            #pragma multi_compile_local _ UNITY_UI_CLIP_RECT
             
-            #include "UnityCG.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
-            #include "Assets/BeatLeader/3_Shaders/Utils/Range.cginc"
             #include "AvatarShared.cginc"
             #include "UIShinyAvatar.cginc"
 
@@ -93,6 +89,9 @@
                     float4 col = _HaloColor * halo_value + _RimColor * rim_value;
                     col.rgb = transform_rgb(clamp(col.rgb, 0, 1), _HueShift, _Saturation, 0.0);
                     col *= i.color.a;
+                    #ifdef UNITY_UI_CLIP_RECT
+                    col *= UnityGet2DClipping(i.local_pos, _ClipRect);
+                    #endif
                     return col;
                 }
             }
