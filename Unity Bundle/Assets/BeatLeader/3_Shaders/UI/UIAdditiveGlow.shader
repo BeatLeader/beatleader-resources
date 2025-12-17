@@ -51,7 +51,6 @@
             float4 _ClipRect;
             sampler2D _MainTex;
             float _FakeBloomAmount;
-            float4 _ClipRect;
 
             v2f vert(const appdata v) {
                 v2f o;
