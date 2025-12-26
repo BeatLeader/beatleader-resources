@@ -1,4 +1,4 @@
-﻿Shader "BL/TMP SDF" {
+Shader "TextMeshPro/Distance Field Overlay" {
 
 Properties {
 	_FaceTex			("Face Texture", 2D) = "white" {}
@@ -87,8 +87,8 @@ Properties {
 SubShader {
 
 	Tags
-	{
-		"Queue"="Transparent"
+  {
+		"Queue"="Overlay"
 		"IgnoreProjector"="True"
 		"RenderType"="Transparent"
 	}
@@ -106,9 +106,9 @@ SubShader {
 	ZWrite Off
 	Lighting Off
 	Fog { Mode Off }
-	ZTest [unity_GUIZTestMode]
+	ZTest Always
 	Blend One OneMinusSrcAlpha
-	ColorMask RGB
+	ColorMask [_ColorMask]
 
 	Pass {
 		CGPROGRAM
@@ -124,9 +124,8 @@ SubShader {
 
 		#include "UnityCG.cginc"
 		#include "UnityUI.cginc"
-		#include "Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc"
-		#include "Assets/TextMesh Pro/Shaders/TMPro.cginc"
-		#include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
+		#include "TMPro_Properties.cginc"
+		#include "TMPro.cginc"
 
 		struct vertex_t
 		{
@@ -136,7 +135,6 @@ SubShader {
 			fixed4	color			: COLOR;
 			float4	texcoord0		: TEXCOORD0;
 			float2	texcoord1		: TEXCOORD1;
-			float2	texcoord2		: TEXCOORD2;
 		};
 
 		struct pixel_t
@@ -155,15 +153,15 @@ SubShader {
 			fixed4	underlayColor	: COLOR1;
 		    #endif
 
-		    float4 textures			: TEXCOORD5;
+			float4 textures			: TEXCOORD5;
 		};
 
 		// Used by Unity internally to handle Texture Tiling and Offset.
-		float4 _FaceTex_ST;
-		float4 _OutlineTex_ST;
-		float _UIMaskSoftnessX;
-        float _UIMaskSoftnessY;
-        int _UIVertexColorAlwaysGammaSpace;
+		uniform float4	_FaceTex_ST;
+		uniform float4	_OutlineTex_ST;
+		uniform float	_UIMaskSoftnessX;
+        uniform float	_UIMaskSoftnessY;
+        uniform int     _UIVertexColorAlwaysGammaSpace;
 
 		pixel_t VertShader(vertex_t input)
 		{
@@ -180,8 +178,7 @@ SubShader {
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 
-			// float4 vPosition = UnityObjectToClipPos(vert);
-			float4 vPosition = UnityObjectToClipPos(get_curved_position(vert, input.texcoord2.x));
+			float4 vPosition = UnityObjectToClipPos(vert);
 
 			float2 pixelSize = vPosition.w;
 			pixelSize /= float2(_ScaleX, _ScaleY) * abs(mul((float2x2)UNITY_MATRIX_P, _ScreenParams.xy));
@@ -194,7 +191,7 @@ SubShader {
 
 			float bias =(.5 - weight) + (.5 / scale);
 
-			float alphaClip = (1.0 - _OutlineWidth * _ScaleRatioA - _OutlineSoftness * _ScaleRatioA);
+			float alphaClip = (1.0 - _OutlineWidth*_ScaleRatioA - _OutlineSoftness*_ScaleRatioA);
 
 		    #if GLOW_ON
 			alphaClip = min(alphaClip, 1.0 - _GlowOffset * _ScaleRatioB - _GlowOuter * _ScaleRatioB);
@@ -308,7 +305,7 @@ SubShader {
 			faceColor.rgb += glowColor.rgb * glowColor.a;
 		    #endif
 
-		// Alternative implementation to UnityGet2DClipping with support for softness.
+		    // Alternative implementation to UnityGet2DClipping with support for softness.
 		    #if UNITY_UI_CLIP_RECT
 			half2 m = saturate((_ClipRect.zw - _ClipRect.xy - abs(input.mask.xy)) * input.mask.zw);
 			faceColor *= m.x * m.y;
@@ -318,7 +315,7 @@ SubShader {
 			clip(faceColor.a - 0.001);
 		    #endif
 
-  		    return faceColor * input.color.a;
+			return faceColor * input.color.a;
 		}
 		ENDCG
 	}

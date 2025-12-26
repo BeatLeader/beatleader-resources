@@ -1,4 +1,4 @@
-﻿Shader "BL/TMP SDF" {
+Shader "TextMeshPro/Distance Field" {
 
 Properties {
 	_FaceTex			("Face Texture", 2D) = "white" {}
@@ -108,7 +108,7 @@ SubShader {
 	Fog { Mode Off }
 	ZTest [unity_GUIZTestMode]
 	Blend One OneMinusSrcAlpha
-	ColorMask RGB
+	ColorMask [_ColorMask]
 
 	Pass {
 		CGPROGRAM
@@ -124,9 +124,8 @@ SubShader {
 
 		#include "UnityCG.cginc"
 		#include "UnityUI.cginc"
-		#include "Assets/TextMesh Pro/Shaders/TMPro_Properties.cginc"
-		#include "Assets/TextMesh Pro/Shaders/TMPro.cginc"
-		#include "Assets/BeatLeader/3_Shaders/Utils/utils.cginc"
+		#include "TMPro_Properties.cginc"
+		#include "TMPro.cginc"
 
 		struct vertex_t
 		{
@@ -136,7 +135,6 @@ SubShader {
 			fixed4	color			: COLOR;
 			float4	texcoord0		: TEXCOORD0;
 			float2	texcoord1		: TEXCOORD1;
-			float2	texcoord2		: TEXCOORD2;
 		};
 
 		struct pixel_t
@@ -180,8 +178,7 @@ SubShader {
 			vert.x += _VertexOffsetX;
 			vert.y += _VertexOffsetY;
 
-			// float4 vPosition = UnityObjectToClipPos(vert);
-			float4 vPosition = UnityObjectToClipPos(get_curved_position(vert, input.texcoord2.x));
+			float4 vPosition = UnityObjectToClipPos(vert);
 
 			float2 pixelSize = vPosition.w;
 			pixelSize /= float2(_ScaleX, _ScaleY) * abs(mul((float2x2)UNITY_MATRIX_P, _ScreenParams.xy));
